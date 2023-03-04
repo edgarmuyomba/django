@@ -16,6 +16,11 @@ def likePost(request, uuid):
     post.save()
     return redirect('core:index')
 
-def postDetails(request, uuid):
+def postDetails(request, uuid, slug):
     post = Post.objects.get(uuid=uuid)
     return render(request, 'core/postDetails.html', {'post': post})
+
+def deletePost(request, uuid):
+    post = Post.objects.get(uuid=uuid)
+    post.delete()
+    return redirect('core:index')

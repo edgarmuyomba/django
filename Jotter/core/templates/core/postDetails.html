@@ -1,22 +1,29 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'core/css/postDetails.css' %}">
+{% endblock css %}
+
 {% block body %}
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="mb-4">{{ post.title }}</h1>
-                <div class="row ml-2">
-                    <p class="font-weight-light">Tags: </p>
-                    <a href="#" class="font-italic">Tag1, </a>
-                    <a href="#" class="font-italic">Tag2, </a>
-                    <a href="#" class="font-italic">Tag3</a>
-                </div>
-                <p class="text-muted mb-4">By Writer's Name on {{ post.dateAdded | date:'F d, Y'}}</p>
-                <p>{{ post.text }}</p>
-                <hr>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="mb-4">{{ post.title }}</h1>
+            <div class="row ml-2">
+                <p class="font-weight-light">Tags: </p>
+                <a href="#" class="font-italic">Tag1, </a>
+                <a href="#" class="font-italic">Tag2, </a>
+                <a href="#" class="font-italic">Tag3</a>
+            </div>
+            <p class="text-muted mb-4">By Writer's Name on {{ post.dateAdded | date:'F d, Y'}}</p>
+            <p>{{ post.text }}</p>
+            <hr>
+            <div class="row dateAndLikes">
                 <p class="text-muted">Likes: {{ post.likes }} | Date: {{ post.dateAdded | date:'F d, Y'}}</p>
+                <a href="{% url 'core:deletePost' post.uuid %}" class="btn btn-danger btn-sm">Delete</a>
             </div>
         </div>
     </div>
+</div>
 {% endblock body %}

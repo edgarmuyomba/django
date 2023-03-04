@@ -33,9 +33,6 @@
                         <small class="text-muted">No likes</small>
                     </div>
                     {% endif %}
-                    <div class="col-6 text-right">
-                        <small class="text-muted">{{ post.dateAdded | date:'H:i . d M Y'}}</small>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -43,7 +40,7 @@
                             Like</a>
                     </div>
                     <div class="col-6 text-right">
-                        <a href="{% url 'core:postDetails' post.uuid %}" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="{% url 'core:postDetails' post.uuid post.slug %}" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
