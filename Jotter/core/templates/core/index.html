@@ -1,85 +1,63 @@
+{% extends 'core/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
+{% block css %}
+<link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+{% endblock css %}
 
-<head>
-    <title>Jotter</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
-</head>
+{% block body %}
+<div class="container mt-3">
+    <h1>Posts</h1>
+    <hr>
 
-<body>
-
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">Jotter</a>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Feed</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Contact</a>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="container mt-3">
-        <h1>Posts</h1>
-        <hr>
-
-        <div class="col">
-            {% for post in posts %}
-            <div class="card mt-3">
-                <div class="card-body">
-                    <h5 class="card-title">Writer's Name</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@writerhandle</h6>
-                    <p class="card-text">{{ post.text }}</p>
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        {% if post.likes %}
-                        <div class="col-6">
-                            <small class="text-muted">{{ post.likes }}</small>
-                        </div>
+    <div class="col">
+        {% for post in posts %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Writer's Name</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@writerhandle</h6>
+                <p class="card-text">{{ post.title }}</p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    {% if post.likes %}
+                    <div class="col-6">
+                        {% if post.likes == 1 %}
+                        <small class="text-muted">{{ post.likes }} like</small>
                         {% else %}
-                        <div class="col-6">
-                            <small class="text-muted">No likes</small>
-                        </div>
+                        <small class="text-muted">{{ post.likes }} likes</small>
                         {% endif %}
-                        <div class="col-6 text-right">
-                            <small class="text-muted">{{ post.dateAdded | date:'Y-m-d H:i'}}</small>
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="#" class="card-link"><i class="far fa-thumbs-up"></i> Like</a>
-                        </div>
-                        <div class="col-6 text-right">
-                            <a href="#" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
+                    {% else %}
+                    <div class="col-6">
+                        <small class="text-muted">No likes</small>
+                    </div>
+                    {% endif %}
+                    <div class="col-6 text-right">
+                        <small class="text-muted">{{ post.dateAdded | date:'H:i . d M Y'}}</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <a href="{% url 'core:likePost' post.uuid %}" class="card-link"><i class="far fa-thumbs-up"></i>
+                            Like</a>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="{% url 'core:postDetails' post.uuid %}" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
-            {% empty %}
-            <div class="col-sm-6 col-lg-12 mx-auto">
-                <div class="card">
-                    <div class="card-body">
-                        <p class="card-text">No Posts</p>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
         </div>
-
+        {% empty %}
+        <div class="col-sm-6 col-lg-12 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">No Posts</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-</body>
 
-</html>
+</div>
+{% endblock body %}

@@ -11,9 +11,10 @@ class Topic(models.Model):
 class Post(models.Model):
     uuid = models.UUIDField(default=uuid4, auto_created=True)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    text = models.CharField(max_length=155)
+    title = models.CharField(max_length=255)
+    text = models.TextField()
     dateAdded = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.text[:50]}...'
+        return self.title
