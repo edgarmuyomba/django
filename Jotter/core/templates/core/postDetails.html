@@ -11,10 +11,11 @@
         <div class="col-lg-12">
             <h1 class="mb-4">{{ post.title }}</h1>
             <div class="row ml-2">
-                <p class="font-weight-light">Tags: </p>
-                <a href="#" class="font-italic">Tag1, </a>
-                <a href="#" class="font-italic">Tag2, </a>
-                <a href="#" class="font-italic">Tag3</a>
+                <p class="font-weight-light">Tags:</p>
+                {% for tag in tags %}
+                <a href="#" class="font-italic">{{ tag }}, </a>
+                {% empty %}
+                {% endfor %}
             </div>
             <p class="text-muted mb-4">By Writer's Name on {{ post.dateAdded | date:'F d, Y'}}</p>
             <p>{{ post.text }}</p>

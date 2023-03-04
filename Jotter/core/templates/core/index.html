@@ -7,7 +7,10 @@
 
 {% block body %}
 <div class="container mt-3">
-    <h1>Posts</h1>
+    <div class="row indexHeader">
+        <h1>Posts</h1>
+        <a href="{% url 'core:createPost' %}" class="btn btn-success btn-sm">New Post</a>
+    </div>
     <hr>
 
     <div class="col">
