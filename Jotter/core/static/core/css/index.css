@@ -1,0 +1,39 @@
+.card {
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .card-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .card-subtitle {
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-text {
+    margin-bottom: 1.5rem;
+  }
+  
+  .card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    padding: 1rem;
+  }
+  
+  .card-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .card-link:hover {
+    text-decoration: underline;
+  }
+  
+  .fa-thumbs-up {
+    margin-right: 0.5rem;
+  }
+  
