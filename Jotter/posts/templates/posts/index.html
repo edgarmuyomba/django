@@ -1,15 +1,15 @@
-{% extends 'core/base.html' %}
+{% extends 'posts/base.html' %}
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+<link rel="stylesheet" href="{% static 'posts/css/index.css' %}">
 {% endblock css %}
 
 {% block body %}
 <div class="container mt-3">
     <div class="row indexHeader">
         <h1>Posts</h1>
-        <a href="{% url 'core:createPost' %}" class="btn btn-success btn-sm">New Post</a>
+        <a href="{% url 'posts:createPost' %}" class="btn btn-success btn-sm">New Post</a>
     </div>
     <hr>
 
@@ -39,11 +39,11 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <a href="{% url 'core:likePost' post.uuid %}" class="card-link"><i class="far fa-thumbs-up"></i>
+                        <a href="{% url 'posts:likePost' post.uuid %}" class="card-link"><i class="far fa-thumbs-up"></i>
                             Like</a>
                     </div>
                     <div class="col-6 text-right">
-                        <a href="{% url 'core:postDetails' post.uuid post.slug %}" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="{% url 'posts:postDetails' post.uuid post.slug %}" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

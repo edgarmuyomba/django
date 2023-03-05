@@ -1,0 +1,42 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+    <div class='row'>
+        <h5>
+            New Post
+        </h5>
+        <div class="col">
+            <form method="POST" action="{% url 'posts:createPost' %}" class="form">
+                {% csrf_token %}
+                <p>
+                    <label for="topic">Topic</label>
+                    <select name="topic" id="topic">
+                        {% for topic in topics %}
+                        <option value="{{ topic }}">{{ topic }}</option>
+                        {% empty %}
+                        <option value="null">None</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                <p>
+                    <label for="title">Title</label>
+                    <input type="text" placeholder="Title" name="title" id="title">
+                </p>
+                <p>
+                    <label for="text">Text</label>
+                    <textarea placeholder="Text" name="text" id="text"></textarea>
+                </p>
+                <p>
+                    <label for="tags">Tags</label>
+                    <input type="text" name="tags" id="tags">
+                </p>
+                <p>
+                    <button name="submit" class="btn btn-success">Post</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

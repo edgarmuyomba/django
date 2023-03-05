@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #my apps
-    'core',
+    'posts',
     #default apps
     'django.contrib.admin',
     'django.contrib.auth',
