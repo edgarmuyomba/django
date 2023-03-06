@@ -16,11 +16,14 @@ class Post(models.Model):
     text = models.TextField()
     dateAdded = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(null=True, blank=True)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False)
     tags = models.CharField(max_length=50)
 
     def __str__(self):
         return self.title
     
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+    def save(self, *args, **kwargs): 
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
+    

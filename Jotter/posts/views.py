@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Post, Topic
 from django.views.generic import View
+from django.template.defaultfilters import slugify
 
 def index(request):
     posts = Post.objects.all().order_by('-dateAdded')
@@ -39,9 +40,10 @@ class createPost(View):
         topic = request.POST['topic'] 
         topic = Topic.objects.get(title=topic)
         pTitle = request.POST['title']
+        slug = slugify(pTitle)
         text = request.POST['text']
         tags = request.POST['tags']
-        newPost = Post.objects.create(topic=topic, title=pTitle, text=text, tags=tags)
+        newPost = Post.objects.create(topic=topic, title=pTitle, text=text, slug=slug, tags=tags)
         newPost.save()
         return redirect('posts:index')
 

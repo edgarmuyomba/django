@@ -43,7 +43,7 @@
                             Like</a>
                     </div>
                     <div class="col-6 text-right">
-                        <a href="{% url 'posts:postDetails' post.uuid post.slug %}" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="{% url 'posts:postDetails' uuid=post.uuid slug=post.slug %}" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
