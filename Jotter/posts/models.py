@@ -36,4 +36,4 @@ class Comment(models.Model):
     dateAdded = models.DateTimeField(auto_now_add=True, auto_created=True)
     
     def __str__(self):
-        return f"{self.text.split(' ')[:5]}"
+        return ' '.join(self.text.split(' ')[:5])

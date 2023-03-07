@@ -22,8 +22,9 @@ def likePost(request, uuid):
 def postDetails(request, uuid, slug):
     post = Post.objects.get(uuid=uuid)
     tags = post.tags.split(',')
-    comments = post.comment_set.all()
-    context = {'post': post, 'tags': tags, 'comments': comments}
+    comments = post.comment_set.all().filter(parent=None)
+    numOfComments = len(post.comment_set.all())
+    context = {'post': post, 'tags': tags, 'comments': comments, 'numOfComments': numOfComments}
     return render(request, 'posts/postDetails.html', context)
 
 def deletePost(request, uuid):
