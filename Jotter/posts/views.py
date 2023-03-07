@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Post, Topic
 from django.views.generic import View
 from django.template.defaultfilters import slugify
+from .forms import postForm
 
 def index(request):
     posts = Post.objects.all().order_by('-dateAdded')
@@ -48,4 +49,19 @@ class createPost(View):
         return redirect('posts:index')
 
 class editPost(View):
-    pass
+    template_name = 'posts/editPost.html'
+    form = postForm
+
+    def get(self, request, uuid):
+        post = Post.objects.get(uuid=uuid)
+        form = self.form(instance=post)
+        context = {'post': post, 'form': form}
+        return render(request, self.template_name, context)
+    
+    def post(self, request, uuid):
+        post = Post.objects.get(uuid=uuid)
+        form = self.form(instance=post, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('posts:index')
+                         

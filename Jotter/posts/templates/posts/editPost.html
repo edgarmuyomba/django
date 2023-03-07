@@ -1,0 +1,10 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+
+{% block body %}
+    <form method="POST" action="{% url 'posts:editPost' post.uuid %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name='submit'>Submit</button>
+    </form>
+{% endblock body %}

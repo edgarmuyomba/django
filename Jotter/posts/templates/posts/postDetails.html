@@ -23,6 +23,7 @@
             <div class="row dateAndLikes">
                 <p class="text-muted">Likes: {{ post.likes }} | Date: {{ post.dateAdded | date:'F d, Y'}}</p>
                 <a href="{% url 'posts:deletePost' post.uuid %}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{% url 'posts:editPost' post.uuid %}" class="btn btn-primary btn-sm">Edit Post</a>
             </div>
         </div>
     </div>
