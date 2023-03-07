@@ -25,6 +25,13 @@
                 <a href="{% url 'posts:deletePost' post.uuid %}" class="btn btn-danger btn-sm">Delete</a>
                 <a href="{% url 'posts:editPost' post.uuid %}" class="btn btn-primary btn-sm">Edit Post</a>
             </div>
+            <a href="{% url 'posts:reply' post.uuid %}">Reply</a>
+            <h5>{{ comments | length }} Comments</h5>
+            {% for comment in comments %}
+                <p>{{ comment.text }} | {{ comment.dateAdded | date:'F d, Y'}}</p>
+                <small><a href="{% url 'posts:reply' postUUID=post.uuid parentUUID=comment.uuid %}">reply</a></small>
+            {% empty %}
+            {% endfor %}
         </div>
     </div>
 </div>

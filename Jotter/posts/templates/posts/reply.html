@@ -1,0 +1,15 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+
+{% block body %}
+    {% if parent %}
+    <form method="POST" action="{% url 'posts:reply' postUUID=post.uuid parentUUID=parent.uuid%}">
+    {% else %}
+    <form method="POST" action="{% url 'posts:reply' postUUID=post.uuid %}">
+    {% endif %}
+        {% csrf_token %}
+        <label for="text">Reply</label>
+        <input type="text" name="text" id="text">
+        <button name="submit" class="btn btn-success">Submit</button>
+    </form>
+{% endblock body %}

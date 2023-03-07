@@ -24,6 +24,16 @@ class Post(models.Model):
     
     def save(self, *args, **kwargs): 
         if not self.slug:
-            self.slug = slugify(self.title)
+            slugList = self.title.split(' ')
+            self.slug = slugify(slugList[:5])
         return super().save(*args, **kwargs)
     
+class Comment(models.Model):
+    uuid = models.UUIDField(default=uuid4)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
+    text = models.TextField()
+    dateAdded = models.DateTimeField(auto_now_add=True, auto_created=True)
+    
+    def __str__(self):
+        return f"{self.text.split(' ')[:5]}"

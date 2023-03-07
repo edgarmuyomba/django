@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post, Topic
+from .models import Post, Topic, Comment
 from django.views.generic import View
 from django.template.defaultfilters import slugify
 from .forms import postForm
@@ -22,7 +22,8 @@ def likePost(request, uuid):
 def postDetails(request, uuid, slug):
     post = Post.objects.get(uuid=uuid)
     tags = post.tags.split(',')
-    context = {'post': post, 'tags': tags}
+    comments = post.comment_set.all()
+    context = {'post': post, 'tags': tags, 'comments': comments}
     return render(request, 'posts/postDetails.html', context)
 
 def deletePost(request, uuid):
@@ -65,3 +66,23 @@ class editPost(View):
             form.save()
             return redirect('posts:index')
                          
+class reply(View):
+    template_name = 'posts/reply.html'
+
+    def get(self, request, postUUID, parentUUID=None):
+        post = Post.objects.get(uuid=postUUID)
+        parent = None
+        if parentUUID:
+            parent = Comment.objects.get(uuid=parentUUID)
+        context = {'post': post, 'parent': parent}
+        return render(request, self.template_name, context)
+    
+    def post(self, request, postUUID, parentUUID=None):
+        text = request.POST['text']
+        fPost = Post.objects.get(uuid=postUUID)
+        parent = None
+        if parentUUID:
+            parent = Comment.objects.get(uuid=parentUUID)
+        newReply = Comment(post=fPost, parent=parent, text=text)
+        newReply.save()
+        return redirect('posts:postDetails', postUUID, fPost.slug)
