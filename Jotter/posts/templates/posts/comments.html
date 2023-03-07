@@ -1,6 +1,7 @@
 {% for comment in comments %}
     <p>{{ comment.text }} | {{ comment.dateAdded | date:'F d, Y'}}</p>
     <small><a href="{% url 'posts:reply' postUUID=post.uuid parentUUID=comment.uuid %}">reply</a></small>
+    <small><a href="{% url 'posts:deleteComment' postUUID=post.uuid comUUID=comment.uuid %}">Delete</a></small>
     {% if comment.replies %}
         {% include 'posts/comments.html' with comments=comment.replies.all %}
     {% endif %}

@@ -27,7 +27,7 @@
             </div>
             <a href="{% url 'posts:reply' post.uuid %}">Reply</a>
             <h5>{{ numOfComments }} Comments</h5>
-            {% include 'posts/comments.html' %}
+            {% include 'posts/comments.html' with post=post %}
         </div>
     </div>
 </div>
