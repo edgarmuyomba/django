@@ -122,3 +122,9 @@ def searchSlug(request, slug):
     )
     context = {'results': results}
     return render(request, 'posts/searchResults.html', context)
+
+def category(request, cat, uuid):
+    topic = Topic.objects.get(uuid=uuid)
+    posts = topic.post_set.all()
+    context = {'topic': topic, 'posts': posts}
+    return render(request, 'posts/category.html', context)

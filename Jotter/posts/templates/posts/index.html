@@ -7,6 +7,12 @@
 
 {% block body %}
 <div class="container mt-3">
+    <div class="row">
+        {% for topic in topics %}
+            <a href="{% url 'posts:category' topic.title topic.uuid %}"> {{ topic.title }} | </a>
+        {% empty %}
+        {% endfor %}
+    </div>
     <div class="row indexHeader">
         <h1>Posts</h1>
         <a href="{% url 'posts:createPost' %}" class="btn btn-success btn-sm">New Post</a>

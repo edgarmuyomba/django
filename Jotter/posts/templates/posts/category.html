@@ -1,0 +1,15 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+
+{% block body %}
+    <h2>{{ topic.title }}</h2>
+    <hr>
+    {% for post in posts %}
+        <h4>
+            <a href="{% url 'posts:postDetails' post.uuid post.slug %}">{{ post.title }}</a>
+        </h4>
+        <p>{{ post.text }}</p>
+    {% empty %}
+        <h4>No posts under category: {{ topic.title }}</h4>
+    {% endfor %}
+{% endblock body %}

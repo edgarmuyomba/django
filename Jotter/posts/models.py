@@ -5,6 +5,7 @@ from django.template.defaultfilters import slugify
 class Topic(models.Model):
     title = models.CharField(max_length=25)
     followers = models.IntegerField(null=True, blank=True)
+    uuid = models.UUIDField(default=uuid4)
 
     def __str__(self):
         return self.title

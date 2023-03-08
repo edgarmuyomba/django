@@ -15,4 +15,5 @@ urlpatterns = [
     path('delete-comment/<str:postUUID>/<str:comUUID>/', views.deleteComment, name='deleteComment'),
     path('search/', views.search, name='search'),
     path('search/?q=<slug:slug>/', views.searchSlug, name='searchSlug'),
+    path('category/<str:cat>/<str:uuid>/', views.category, name='category'),
 ]
