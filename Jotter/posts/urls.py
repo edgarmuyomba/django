@@ -16,4 +16,5 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('search/?q=<slug:slug>/', views.searchSlug, name='searchSlug'),
     path('category/<str:cat>/<str:uuid>/', views.category, name='category'),
+    path('tag/<str:sTag>/', views.tag, name='tag'),
 ]

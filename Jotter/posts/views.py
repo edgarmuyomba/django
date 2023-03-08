@@ -128,3 +128,8 @@ def category(request, cat, uuid):
     posts = topic.post_set.all()
     context = {'topic': topic, 'posts': posts}
     return render(request, 'posts/category.html', context)
+
+def tag(request, sTag):
+    posts = Post.objects.all().filter(tags__icontains=sTag)
+    context = {'posts': posts, 'tag': sTag}
+    return render(request, 'posts/tag.html', context)

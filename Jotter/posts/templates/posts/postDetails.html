@@ -13,7 +13,7 @@
             <div class="row ml-2">
                 <p class="font-weight-light">Tags:</p>
                 {% for tag in tags %}
-                <a href="#" class="font-italic">{{ tag }}, </a>
+                <a href="{% url 'posts:tag' tag %}" class="font-italic">{{ tag }}, </a>
                 {% empty %}
                 {% endfor %}
             </div>
