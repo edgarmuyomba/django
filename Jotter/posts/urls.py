@@ -14,5 +14,5 @@ urlpatterns = [
     path('reply/<str:postUUID>/<str:parentUUID>/', views.reply.as_view(), name='reply'),
     path('delete-comment/<str:postUUID>/<str:comUUID>/', views.deleteComment, name='deleteComment'),
     path('search/', views.search, name='search'),
-    path('search/?q=<slug:slug>/', views.search, name='searchSlug'),
+    path('search/?q=<slug:slug>/', views.searchSlug, name='searchSlug'),
 ]

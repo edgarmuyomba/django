@@ -113,18 +113,12 @@ def search(request):
         slug = slugify(query)
         if slug:
             return redirect('posts:searchSlug', slug)
-        else:
-            results = Post.object.all().filter(
-                Q(title__icontains=query) | Q(text__icontains=query))
-            context = {'results': results, 'slug': slug, 'query': query}
-            return render(request, 'posts/searchResults.html', context)
-
-
-def searchSlug(request):
-    if request.method == 'POST':
-        query = request.POST['search']
-        slug = slugify(query)
-        results = Post.object.all().filter(
-            Q(title__icontains=query) | Q(text__icontains=query))
-        context = {'results': results, 'slug': slug, 'query': query}
-        return render(request, 'posts/searchResults.html', context)
+        
+def searchSlug(request, slug):
+    query = slug.split('-')
+    query = ' '.join(query)
+    results = Post.objects.all().filter(
+        Q(title__icontains=query) | Q(text__icontains=query)
+    )
+    context = {'results': results}
+    return render(request, 'posts/searchResults.html', context)
