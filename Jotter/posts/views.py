@@ -8,7 +8,7 @@ from django.utils.text import slugify
 
 
 def index(request):
-    posts = Post.objects.all().order_by('-dateAdded')
+    posts = Post.objects.all().order_by('-likes')
     topics = Topic.objects.all()
     context = {'posts': posts, 'topics': topics}
     return render(request, 'posts/index.html', context)
