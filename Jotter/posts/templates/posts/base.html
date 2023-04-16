@@ -21,9 +21,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'posts:index' %}">Feed</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">About</a>
-            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:profile' user.username %}">{{ user }}</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">About</a>
+                </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Contact</a>
             </li>

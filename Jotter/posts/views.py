@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.utils.text import slugify
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib.auth import get_user_model
 
 def index(request):
@@ -44,7 +45,7 @@ def deletePost(request, uuid):
         return HttpResponseForbidden()
     return redirect('posts:index')
 
-@login_required()
+@method_decorator(login_required, name='dispatch')
 class createPost(View):
     template_name = 'posts/createPost.html'
 
@@ -64,7 +65,7 @@ class createPost(View):
         newPost.save()
         return redirect('posts:index')
 
-@login_required()
+@method_decorator(login_required, name='dispatch')
 class editPost(View):
     template_name = 'posts/editPost.html'
     form = postForm
@@ -85,7 +86,7 @@ class editPost(View):
             form.save()
             return redirect('posts:index')
 
-@login_required()
+@method_decorator(login_required, name='dispatch')
 class reply(View):
     template_name = 'posts/reply.html'
 

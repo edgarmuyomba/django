@@ -3,9 +3,9 @@ from django.contrib.auth.models import AbstractUser
 from posts.models import Topic
 
 class CustomUser(AbstractUser):
-    firstName = models.CharField(max_length=50)
-    lastName = models.CharField(max_length=50)
     userName = models.CharField(max_length=50, unique=True)
+    firstname = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
     email = models.EmailField(max_length=254, unique=True)
     bio = models.TextField(max_length=500, blank=True)
     profilePic = models.ImageField(upload_to='profilePics', blank=True)
@@ -17,5 +17,5 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ['username', 'firstName', 'lastName']
 
     def __str__(self):
-        return self.firstName
+        return self.firstname.title()
     pass
