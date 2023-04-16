@@ -1,6 +1,7 @@
 from django.db import models
 from uuid import uuid4
 from django.template.defaultfilters import slugify
+from django.conf import settings
 
 class Topic(models.Model):
     title = models.CharField(max_length=25)
@@ -12,6 +13,7 @@ class Topic(models.Model):
 
 class Post(models.Model):
     uuid = models.UUIDField(default=uuid4, auto_created=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     text = models.TextField()
@@ -32,6 +34,7 @@ class Post(models.Model):
 class Comment(models.Model):
     uuid = models.UUIDField(default=uuid4)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
     text = models.TextField()
     dateAdded = models.DateTimeField(auto_now_add=True, auto_created=True)

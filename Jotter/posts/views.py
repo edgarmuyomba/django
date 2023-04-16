@@ -5,6 +5,7 @@ from django.template.defaultfilters import slugify
 from .forms import postForm
 from django.db.models import Q
 from django.utils.text import slugify
+from django.views.generic import ListView
 
 
 def index(request):
