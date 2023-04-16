@@ -6,7 +6,8 @@ from .forms import postForm
 from django.db.models import Q
 from django.utils.text import slugify
 from django.views.generic import ListView
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 
 def index(request):
     posts = Post.objects.all().order_by('-likes')
@@ -14,7 +15,7 @@ def index(request):
     context = {'posts': posts, 'topics': topics}
     return render(request, 'posts/index.html', context)
 
-
+@login_required()
 def likePost(request, uuid):
     post = Post.objects.get(uuid=uuid)
     if post.likes:
@@ -24,7 +25,7 @@ def likePost(request, uuid):
     post.save()
     return redirect('posts:index')
 
-
+@login_required()
 def postDetails(request, uuid, slug):
     post = Post.objects.get(uuid=uuid)
     tags = post.tags.split(',')
@@ -34,13 +35,16 @@ def postDetails(request, uuid, slug):
                'comments': comments, 'numOfComments': numOfComments}
     return render(request, 'posts/postDetails.html', context)
 
-
+@login_required()
 def deletePost(request, uuid):
     post = Post.objects.get(uuid=uuid)
-    post.delete()
+    if request.user == post.author:
+        post.delete()
+    else:
+        return HttpResponseForbidden()
     return redirect('posts:index')
 
-
+@login_required()
 class createPost(View):
     template_name = 'posts/createPost.html'
 
@@ -60,16 +64,19 @@ class createPost(View):
         newPost.save()
         return redirect('posts:index')
 
-
+@login_required()
 class editPost(View):
     template_name = 'posts/editPost.html'
     form = postForm
 
     def get(self, request, uuid):
         post = Post.objects.get(uuid=uuid)
-        form = self.form(instance=post)
-        context = {'post': post, 'form': form}
-        return render(request, self.template_name, context)
+        if request.user != post.author:
+            return HttpResponseForbidden()
+        else:
+            form = self.form(instance=post)
+            context = {'post': post, 'form': form}
+            return render(request, self.template_name, context)
 
     def post(self, request, uuid):
         post = Post.objects.get(uuid=uuid)
@@ -78,7 +85,7 @@ class editPost(View):
             form.save()
             return redirect('posts:index')
 
-
+@login_required()
 class reply(View):
     template_name = 'posts/reply.html'
 
@@ -100,21 +107,24 @@ class reply(View):
         newReply.save()
         return redirect('posts:postDetails', postUUID, fPost.slug)
 
-
+@login_required()
 def deleteComment(request, postUUID, comUUID):
     comment = Comment.objects.get(uuid=comUUID)
-    comment.delete()
-    post = Post.objects.get(uuid=postUUID)
-    return redirect('posts:postDetails', postUUID, post.slug)
+    if request.user != comment.author:
+        return HttpResponseForbidden()
+    else:
+        comment.delete()
+        post = Post.objects.get(uuid=postUUID)
+        return redirect('posts:postDetails', postUUID, post.slug)
 
-
+@login_required()
 def search(request):
     if request.method == 'POST':
         query = request.POST['search']
         slug = slugify(query)
         if slug:
             return redirect('posts:searchSlug', slug)
-        
+       
 def searchSlug(request, slug):
     query = slug.split('-')
     query = ' '.join(query)
@@ -124,12 +134,14 @@ def searchSlug(request, slug):
     context = {'results': results}
     return render(request, 'posts/searchResults.html', context)
 
+@login_required()
 def category(request, cat, uuid):
     topic = Topic.objects.get(uuid=uuid)
     posts = topic.post_set.all()
     context = {'topic': topic, 'posts': posts}
     return render(request, 'posts/category.html', context)
 
+@login_required()
 def tag(request, sTag):
     posts = Post.objects.all().filter(tags__icontains=sTag)
     context = {'posts': posts, 'tag': sTag}
