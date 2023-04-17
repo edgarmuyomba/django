@@ -36,7 +36,7 @@ class registerView(View):
         else:
             return render(request, 'users/signup.html', {'form': form})
 
-def logout(request):
+def logOutView(request):
     logout(request)
     return redirect('posts:index')
 
