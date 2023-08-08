@@ -18,7 +18,7 @@ class Post(models.Model):
     title = models.CharField(max_length=150)
     text = models.TextField()
     dateAdded = models.DateTimeField(auto_now_add=True)
-    likes = models.IntegerField(null=True, blank=True)
+    likes = models.IntegerField(null=True, blank=True, default=0)
     slug = models.SlugField(null=False)
     tags = models.CharField(max_length=50)
 
