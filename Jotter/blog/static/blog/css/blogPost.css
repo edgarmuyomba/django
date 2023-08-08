@@ -1,0 +1,22 @@
+.post {
+    border: 1px solid red;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+    padding: 16px;
+}
+
+.post > .header {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.post > .footer {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    gap: 8px;
+}

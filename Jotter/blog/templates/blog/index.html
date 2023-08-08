@@ -1,1 +1,11 @@
-<h1>Hello, World!</h1>
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="main">
+    {% for post in post_list %}
+    {% include "blog/blogPost.html" %}
+    {% empty %}
+    <p> . </p>
+    {% endfor %}
+</div>
+{% endblock content %}

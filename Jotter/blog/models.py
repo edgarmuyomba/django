@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 
 class Topic(models.Model):
     title = models.CharField(max_length=25)
-    followers = models.IntegerField(null=True, blank=True)
+    followers = models.IntegerField(null=True, blank=True, default=0)
     uuid = models.UUIDField(default=uuid4)
 
     def __str__(self):
@@ -24,6 +24,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ('-dateAdded',)
     
     def save(self, *args, **kwargs): 
         if not self.slug:
