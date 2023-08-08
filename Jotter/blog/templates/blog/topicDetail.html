@@ -18,7 +18,7 @@
 
 <div class="header">
     <div class="title">{{ topic.title }}</div>
-    <div class="followers">{{ topic.followers }}</div>
+    <div class="followers">{{ followers|length }}</div>
     {% if subscribed %}
         <button class="unsub">Unsubscribe</button>
     {% else %}

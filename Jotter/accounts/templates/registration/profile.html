@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block staticfiles %}
-    <script src="{% static 'accounts/js/script.js' %}" defer></script>
+<script src="{% static 'accounts/js/profile.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'blog/css/blogPost.css' %}">
 {% endblock staticfiles %}
 
 {% block title %}
@@ -10,13 +11,26 @@
 {% endblock title %}
 
 {% block content %}
+<script>
+    var unfollowUrl = "{% url 'accounts:unfollow' profile.username %}";
+    var followUrl = "{% url 'accounts:follow' profile.username %}";
+</script>
+
 <div class="sidebar">
     <img src="" alt="profile picture">
-    <h3 class="name">{{ profile.first_name }} {{ profile.last_name }}</h3>
+    <h3 class="name">{{ profile.get_full_name }}</h3>
     <p class="handle">@{{ profile.username }}</p>
+    {% if request.user != profile %}
+    {% if follow %}
+    <button class="unfollow">Unfollow</button>
+    {% else %}
+    <button class="follow">Follow</button>
+    {% endif %}
+    {% else %}
+    {% endif %}
     <div class="stats">
-        <div class="followers">{{ profile.followers|length }} followers</div>
-        <div class="following">{{ profile.following|length }} following</div>
+        <div class="followers">{{ followers|length }} followers</div>
+        <div class="following">{{ following|length }} following</div>
         <div class="posts">{{ posts|length }} posts</div>
         <div class="topics">{{ topics|length }} topics</div>
     </div>
@@ -26,39 +40,68 @@
     <div class="navbar">
         <ul>
             <li>
-                <button id="0">
+                <button class="posts">
                     Posts
                     <span class="badge">{{ posts|length }}</span>
                 </button>
             </li>
             <li>
-                <button id="1">
-                    Comments
-                    <span class="badge">{{ comments|length }}</span>
+                <button class="likedPosts">
+                    Likes
+                    <span class="badge">{{ likedPosts|length }}</span>
                 </button>
             </li>
             <li>
-                <button id="2">
+                <button class="topics">
                     Topics
                     <span class="badge">{{ topics|length }}</span>
                 </button>
             </li>
             <li>
-                <button id="3">
+                <button class="following">
                     Following
-                    <span class="badge">{{ profile.following|length }}</span>
+                    <span class="badge">{{ following|length }}</span>
                 </button>
             </li>
             <li>
-                <button id="4">
+                <button class="followers">
                     Followers
-                    <span class="badge">{{ profile.followers|length }}</span>
+                    <span class="badge">{{ followers|length }}</span>
                 </button>
             </li>
         </ul>
     </div>
     <div class="content">
-        {% include "registration/dynamicContent.html" with contents=posts %}
+        <div class="posts">
+            {% for post in posts %}
+            {% include 'blog/blogPost.html' %}
+            {% empty %}
+            {% endfor %}
+        </div>
+        <div class="following" style="display: none;">
+            {% for follower in following %}
+            {% include 'registration/profileTab.html' with profile=follower %}
+            {% empty %}
+            {% endfor %}
+        </div>
+        <div class="followers" style="display: none;">
+            {% for follower in followers %}
+            {% include 'registration/profileTab.html' with profile=follower %}
+            {% empty %}
+            {% endfor %}
+        </div>
+        <div class="likedPosts" style="display: none;">
+            {% for post in likedPosts %}
+            {% include 'blog/blogPost.html' %}
+            {% empty %}
+            {% endfor %}
+        </div>
+        <div class="topics" style="display: none;">
+            {% for topic in topics %}
+            {% include 'blog/topicTab.html' %}
+            {% empty %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock content %}

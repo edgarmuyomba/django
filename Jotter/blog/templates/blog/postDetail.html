@@ -10,7 +10,7 @@
         <div class="header">
             <div class="topic"><a href="{% url 'blog:topicDetail' post.topic.uuid %}">{{ post.topic }}</a></div>
             <div class="time">{{ post.dateAdded|date:"F jS o" }}</div>
-            <div class="auth">{{ post.author }}</div>
+            <div class="auth"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a></div>
         </div>
         <div class="title">{{ post.title }}</div>
         <div class="content">{{ post.text|linebreaks }}</div>
