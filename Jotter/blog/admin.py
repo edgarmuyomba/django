@@ -8,7 +8,7 @@ admin.site.register(Topic, TopicAdmin)
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['title']}
-    list_display = ['title', 'topic', 'author', 'likes', 'tags']
+    list_display = ['title', 'topic', 'author', 'tags']
 
 admin.site.register(Post, PostAdmin)
 

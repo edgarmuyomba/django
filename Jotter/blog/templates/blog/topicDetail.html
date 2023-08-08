@@ -7,12 +7,23 @@
 
 {% block staticfiles %}
     <link rel="stylesheet" href="{% static 'blog/css/blogPost.css' %}">
+    <script src="{% static 'blog/js/topicDetail.js' %}" defer></script>
 {% endblock staticfiles %}
 
 {% block content %}
+<script>
+    var subUrl = "{% url 'blog:subscribe' topic.uuid %}";
+    var unsubUrl = "{% url 'blog:unsubscribe' topic.uuid %}"
+</script>
+
 <div class="header">
     <div class="title">{{ topic.title }}</div>
     <div class="followers">{{ topic.followers }}</div>
+    {% if subscribed %}
+        <button class="unsub">Unsubscribe</button>
+    {% else %}
+        <button class="sub">Subscribe</button>
+    {% endif %}
 </div>
 <div class="main">
     {% for post in posts %}

@@ -18,9 +18,9 @@ class Post(models.Model):
     title = models.CharField(max_length=150)
     text = models.TextField()
     dateAdded = models.DateTimeField(auto_now_add=True)
-    likes = models.IntegerField(null=True, blank=True, default=0)
     slug = models.SlugField(null=False)
     tags = models.CharField(max_length=50)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Like', related_name='likedPosts')
 
     def __str__(self):
         return self.title
@@ -47,3 +47,11 @@ class Comment(models.Model):
     
     class Meta:
         ordering = ['-dateAdded']
+
+class Like(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']

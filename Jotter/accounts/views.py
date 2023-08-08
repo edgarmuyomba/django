@@ -21,5 +21,6 @@ class Profile(DetailView):
         profile = super(Profile, self).get_object()
         posts = profile.post_set.all()
         comments = profile.comment_set.all()
-        context = {'profile': profile, 'posts': posts, 'comments': comments}
+        topics = profile.topics.all()
+        context = {'profile': profile, 'posts': posts, 'comments': comments, 'topics': topics}
         return render(request, self.template_name, context)
