@@ -1,0 +1,64 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block staticfiles %}
+    <script src="{% static 'accounts/js/script.js' %}" defer></script>
+{% endblock staticfiles %}
+
+{% block title %}
+{{ profile.username }}
+{% endblock title %}
+
+{% block content %}
+<div class="sidebar">
+    <img src="" alt="profile picture">
+    <h3 class="name">{{ profile.first_name }} {{ profile.last_name }}</h3>
+    <p class="handle">@{{ profile.username }}</p>
+    <div class="stats">
+        <div class="followers">{{ profile.followers|length }}</div>
+        <div class="following">{{ profile.following|length }}</div>
+        <div class="posts">{{ posts|length }}</div>
+        <div class="topics">{{ profile.topics|length }}</div>
+    </div>
+    <div class="joined">Joined {{ profile.date_joined|date:"F o" }}</div>
+</div>
+<div class="main">
+    <div class="navbar">
+        <ul>
+            <li>
+                <button id="0">
+                    Posts
+                    <span class="badge">{{ posts|length }}</span>
+                </button>
+            </li>
+            <li>
+                <button id="1">
+                    Comments
+                    <span class="badge">{{ comments|length }}</span>
+                </button>
+            </li>
+            <li>
+                <button id="2">
+                    Topics
+                    <span class="badge">{{ profile.topics|length }}</span>
+                </button>
+            </li>
+            <li>
+                <button id="3">
+                    Following
+                    <span class="badge">{{ profile.following|length }}</span>
+                </button>
+            </li>
+            <li>
+                <button id="4">
+                    Followers
+                    <span class="badge">{{ profile.followers|length }}</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        {% include "registration/dynamicContent.html" with contents=posts %}
+    </div>
+</div>
+{% endblock content %}

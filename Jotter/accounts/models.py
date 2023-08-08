@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from blog.models import Topic, Post, Comment
+from blog.models import Topic
 
 class CustomUser(AbstractUser):
     bio = models.TextField(max_length=500, blank=True)
