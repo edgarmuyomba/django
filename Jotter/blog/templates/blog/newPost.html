@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+    Jot
+{% endblock title %}
+
+{% block content %}
+    <form action="{% url 'blog:newPost' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+{% endblock content %}

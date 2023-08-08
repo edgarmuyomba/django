@@ -1,19 +1,19 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-    {{ topic }}
+{{ topic }}
 {% endblock title %}
 
 {% block content %}
-    <div class="header">
-        <div class="title">{{ topic.title }}</div>
-        <div class="followers">{{ topic.followers }}</div>
-    </div>
-    <div class="main">
-        {% for post in posts %}
-            {% include "blog/blogPost.html" %}
-        {% empty %}
-            <p> . </p>
-        {% endfor %}
-    </div>
+<div class="header">
+    <div class="title">{{ topic.title }}</div>
+    <div class="followers">{{ topic.followers }}</div>
+</div>
+<div class="main">
+    {% for post in posts %}
+    {% include "blog/blogPost.html" %}
+    {% empty %}
+    <p> . </p>
+    {% endfor %}
+</div>
 {% endblock content %}

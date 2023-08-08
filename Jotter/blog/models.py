@@ -44,3 +44,6 @@ class Comment(models.Model):
     
     def __str__(self):
         return ' '.join(self.text.split(' ')[:5])
+    
+    class Meta:
+        ordering = ['-dateAdded']

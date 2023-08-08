@@ -9,7 +9,7 @@
         <div class="time">{{ post.dateAdded|date:"F jS o" }}</div>
     </div>
     <div class="title"><a href="{% url 'blog:postDetail' post.slug %}">{{ post.title }}</a></div>
-    <div class="content">{{ post.text|linebreaks }}</div>
+    <div class="content">{{ post.text|truncatewords:70 }}</div>
     <div class="footer">
         <div class="like">❤️</div>
         <div class="share">🦈</div>
