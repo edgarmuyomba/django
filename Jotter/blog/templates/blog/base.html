@@ -1,8 +1,11 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'blog/css/base.css' %}">
     {% block staticfiles %}
     {% endblock staticfiles %}
     <title>
@@ -15,6 +18,7 @@
     <div class="navbar">
         <a href="{% url 'blog:index' %}">
             <div class="logo">
+                <img src="{% static 'blog/img/post.svg' %}" alt="" style="width: 50px;">
                 Jotter
             </div>
         </a>
@@ -23,14 +27,21 @@
         </form>
         <div class="links">
             {% if user.is_authenticated %}
-                <a href="{% url 'accounts:profile' user.username %}">{{ user.username }}</a>
-                <a href="{% url 'accounts:logout' %}">Logout</a>
+                <a href="{% url 'accounts:profile' user.username %}" class="profile">
+                    <img src="{% static 'blog/img/account-circle.svg' %}" alt="" style="width: 25px;">
+                    
+                </a>
+                <a href="{% url 'accounts:logout' %}" class="logout">
+                    <img src="{% static 'blog/img/logout.svg' %}" alt="" style="width: 25px;">
+                    </a>
             {% else %}
-                <a href="{% url 'accounts:login' %}">Login</a>
+                <a href="{% url 'accounts:login' %}" class="login">Login</a>
             {% endif %}
         </div>
     </div>
-    {% block content %}
-    {% endblock content %}
+    <div class="main">
+        {% block content %}
+        {% endblock content %}
+    </div>
 </body>
 </html>
