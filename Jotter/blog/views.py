@@ -2,9 +2,11 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Post, Topic, Comment, Like
+from accounts.models import CustomUser
 from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, JsonResponse
+from itertools import chain
 
 
 class Index(ListView):
@@ -88,3 +90,13 @@ def unsubscribe(request, uuid):
     topic = get_object_or_404(Topic, uuid=uuid)
     request.user.topics.remove(topic)
     return JsonResponse({'message': 'success'})
+
+def search(request):
+    if request.method == 'GET':
+        query = request.GET['search']
+        topics = Topic.objects.filter(title__icontains=query)
+        posts = Post.objects.filter(text__icontains=query) | Post.objects.filter(title__icontains=query)
+        authors = CustomUser.objects.filter(first_name__icontains=query) | CustomUser.objects.filter(last_name__icontains=query) | CustomUser.objects.filter(username__icontains=query)
+        comments = Comment.objects.filter(text__icontains=query)
+        results = list(chain(topics, posts, comments, authors))
+        return render(request, 'blog/search.html', {'results': results, 'query': query })

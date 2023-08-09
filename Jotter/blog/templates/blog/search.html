@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    {{ query }}
+{% endblock title %}
+
+{% block content %}
+    {% for results in results %}
+        <p>{{ results }}</p>
+    {% empty %}
+        <p>No results contain {{ query }}</p>
+    {% endfor %}
+{% endblock content %}

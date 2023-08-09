@@ -18,6 +18,9 @@
                 Jotter
             </div>
         </a>
+        <form action="{% url 'blog:search' %}" method="GET">
+            <input type="text" placeholder="Search" name='search'>
+        </form>
         <div class="links">
             {% if user.is_authenticated %}
                 <a href="{% url 'accounts:profile' user.username %}">{{ user.username }}</a>

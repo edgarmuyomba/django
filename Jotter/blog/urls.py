@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Index, TopicDetail, PostDetail, NewPost, NewComment, likePost, subscribe, unsubscribe
+from .views import Index, TopicDetail, PostDetail, NewPost, NewComment, likePost, subscribe, unsubscribe, search
 
 app_name = 'blog'
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('like/<str:uuid>/', likePost, name="likePost"),
     path('subscribe/<str:uuid>/', subscribe, name="subscribe"),
     path('unsubscribe/<str:uuid>/', unsubscribe, name="unsubscribe"),
+    path('search/', search, name='search')
 ]
