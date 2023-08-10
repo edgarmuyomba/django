@@ -7,8 +7,4 @@
     </div>
     <div class="title"><a href="{% url 'blog:postDetail' post.slug %}">{{ post.title|upper }}</a></div>
     <div class="content">{{ post.text|truncatewords:70 }}</div>
-    <div class="footer">
-        <div class="like">❤️</div>
-        <div class="share">🦈</div>
-    </div>
 </div>

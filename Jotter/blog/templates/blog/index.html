@@ -8,23 +8,23 @@
 
 {% block content %}
 <a href="{% url 'blog:newPost' %}">
-    <div class="newPost">
-        Jot
-    </div>
+    <button class="newPost">
+        <img src="{% static 'blog/icons/pen.svg' %}" width="15px" alt="">
+    </button>
 </a>
 <div class="main">
     <div class="header">
         <div class="top">
-            <img src="{% static 'blog/img/mountain-goat.jpg' %}" alt="">
+            <img src="{% static 'blog/img/blank.jpg' %}" alt="">
             <div class="time">{{ top.dateAdded|date:"F jS o" }}</div>
             <div class="title"><a href="{% url 'blog:postDetail' top.slug %}">{{ top.title|upper }}</a></div>
-            <div class="content">{{ top.text|truncatewords:70 }}</div>
+            <div class="content">{{ top.text|truncatewords:100 }}</div>
         </div>
         <div class="side">
             {% for post in three %}
                 <div class="three">
                     <div class="image">
-                        <img src="{% static 'blog/img/sports-car.jpg' %}" alt="">
+                        <img src="{% static 'blog/img/blank.jpg' %}" alt="">
                     </div>
                     <div class="title">
                         <div class="time">{{ post.dateAdded|date:"F jS o" }}</div>

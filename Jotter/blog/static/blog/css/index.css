@@ -1,3 +1,10 @@
+.newPost {
+    padding: 4px;
+    width: 50px;
+    background-color: darkgray;
+    border: 0;
+}
+
 .main > .header {
     display: flex;
     flex-direction: row;
@@ -5,8 +12,18 @@
     margin-bottom: 16px;
 }
 
+.header > .top,
+.side > * {
+    border: 1px solid black;
+    padding: 16px;
+}
+
+.side > * {
+    margin-bottom: 8px;
+}
+
 .top > img {
-    width: 100%;
+    width: 80%;
 }
 
 .top > .time {
@@ -21,4 +38,14 @@
 
 .three img {
     width: 250px;
+}
+
+.three .time {
+    font-weight: 100;
+    font-size: 12px;
+    color: grey;
+}
+
+.three .title {
+    font-weight: 600;
 }

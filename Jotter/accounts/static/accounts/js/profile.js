@@ -25,10 +25,18 @@ buttons.forEach((button) => {
                     console.error(error);
                 });
         } else {
+            buttons.forEach((button) => {
+                if (button.classList.contains('selected')) button.classList.remove('selected');
+            })
+            button.classList.add('selected');
             subFrames.forEach((frame) => {
                 let frameClass = frame.getAttribute('class');
-                if (state !== frameClass) frame.style.display = 'none';
-                else frame.style.display = "";
+                if (state !== frameClass) {
+                    frame.style.display = 'none';
+                }
+                else {
+                    frame.style.display = "";
+                }
             })
         }
     })

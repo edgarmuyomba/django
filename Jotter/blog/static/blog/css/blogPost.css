@@ -10,7 +10,8 @@
     display: flex;
     flex-direction: row;
     gap: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+    align-items: center;
 }
 
 .post > .footer {
@@ -18,4 +19,25 @@
     flex-direction: row;
     margin-left: auto;
     gap: 8px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.topic {
+    border: 1px solid black;
+    padding: 4px;
+    background-color: black;
+}
+
+.topic a {
+    color: rgb(197, 197, 197);
+    font-size: 13px;
+}
+
+.time {
+    font-size: 10px;
+    color: grey;
 }

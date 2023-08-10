@@ -1,0 +1,86 @@
+.profile {
+    display: flex;
+    flex-direction: row;
+}
+
+.profileImage {
+    background-image: url('../img/profile.jpg');
+    background-position: center;
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 8px 0;
+}
+
+.handle {
+    font-size: 15px;
+    color: grey;
+}
+
+.stats {
+    margin: 16px 0;
+    display: grid;
+    grid-template-columns: 120px 150px;
+    gap: 8px;
+}
+
+.stats > * {
+    border: 1px solid black;
+    padding: 16px;
+}
+
+.joined {
+    font-size: 13px;
+    color: grey;
+}
+
+.main {
+    width: 100%;
+}
+
+.main ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    border: 1px solid black;
+    padding: 16px;
+}
+
+ul > li > button {
+    border-radius: 0;
+    border: 2px solid slategray;
+    color: slategray;
+}
+
+ul > li:first-child > button {
+    border-radius: 5px 0 0 5px;
+}
+
+ul > li:last-child > button {
+    border-radius: 0 5px 5px 0;
+}
+
+.profileNavbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.profileNavbar button {
+    padding: 8px;
+}
+
+button.selected {
+    background-color: slategray;
+    color: white;
+    border: 2px solid slategray;
+}
+
+.topics {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 6px;
+}

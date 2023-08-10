@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+.profileCard {
+    border: 1px solid darkslategray;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+}
+
+.profileCard > .profileImage {
+    background-image: url('../img/profile.jpg');
+    width: 75px;
+    height: 75px;
+    background-position: center;
+}
+
+.profileCard > .details {
+    padding: 10px;
+}

@@ -1,0 +1,10 @@
+.topicCard {
+    border: 1px solid darkslategray;
+    padding: 16px;
+    margin: 8px 0;
+}
+
+.subscribers, .postCount {
+    color: grey;
+    font-size: 13px;
+}
