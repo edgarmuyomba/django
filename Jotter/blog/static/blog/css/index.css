@@ -1,0 +1,24 @@
+.main > .header {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.top > img {
+    width: 100%;
+}
+
+.top > .time {
+    font-weight: 100;
+    font-size: 12px;
+}
+
+.top > .title {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.three img {
+    width: 250px;
+}

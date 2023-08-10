@@ -18,7 +18,7 @@
     <div class="navbar">
         <a href="{% url 'blog:index' %}">
             <div class="logo">
-                <img src="{% static 'blog/img/post.svg' %}" alt="" style="width: 50px;">
+                <img src="{% static 'blog/icons/post.svg' %}" alt="" style="width: 50px;">
                 Jotter
             </div>
         </a>
@@ -28,11 +28,11 @@
         <div class="links">
             {% if user.is_authenticated %}
                 <a href="{% url 'accounts:profile' user.username %}" class="profile">
-                    <img src="{% static 'blog/img/account-circle.svg' %}" alt="" style="width: 25px;">
+                    <img src="{% static 'blog/icons/account-circle.svg' %}" alt="" style="width: 25px;">
                     
                 </a>
                 <a href="{% url 'accounts:logout' %}" class="logout">
-                    <img src="{% static 'blog/img/logout.svg' %}" alt="" style="width: 25px;">
+                    <img src="{% static 'blog/icons/logout.svg' %}" alt="" style="width: 25px;">
                     </a>
             {% else %}
                 <a href="{% url 'accounts:login' %}" class="login">Login</a>

@@ -13,6 +13,17 @@ class Index(ListView):
     model = Post 
     template_name = "blog/index.html"
 
+    def get(self, request, *args, **kwargs):
+        posts = super(Index, self).get_queryset()
+        top = posts[0]
+        try:
+            three = posts[1:4]
+            posts = posts[4:]
+        except IndexError:
+            three = None 
+            posts = posts[1:]
+        return render(request, self.template_name, {'posts': posts, 'top': top, 'three': three})
+
 class TopicDetail(DetailView):
     model = Topic 
     slug_field = 'uuid'

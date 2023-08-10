@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block staticfiles %}
+    <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/blogPost.css' %}">
 {% endblock staticfiles %}
 
@@ -12,7 +13,29 @@
     </div>
 </a>
 <div class="main">
-    {% for post in post_list %}
+    <div class="header">
+        <div class="top">
+            <img src="{% static 'blog/img/mountain-goat.jpg' %}" alt="">
+            <div class="time">{{ top.dateAdded|date:"F jS o" }}</div>
+            <div class="title"><a href="{% url 'blog:postDetail' top.slug %}">{{ top.title|upper }}</a></div>
+            <div class="content">{{ top.text|truncatewords:70 }}</div>
+        </div>
+        <div class="side">
+            {% for post in three %}
+                <div class="three">
+                    <div class="image">
+                        <img src="{% static 'blog/img/sports-car.jpg' %}" alt="">
+                    </div>
+                    <div class="title">
+                        <div class="time">{{ post.dateAdded|date:"F jS o" }}</div>
+                        <div class="title"><a href="{% url 'blog:postDetail' post.slug %}">{{ post.title|upper }}</a></div>
+                    </div>
+                </div>
+            {% empty %}
+            {% endfor %}
+        </div>
+    </div>
+    {% for post in posts %}
     {% include "blog/blogPost.html" %}
     {% empty %}
     <p> . </p>
