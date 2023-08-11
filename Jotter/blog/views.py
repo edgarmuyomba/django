@@ -47,8 +47,9 @@ class PostDetail(DetailView):
 
     def get(self, request, *args, **kwargs):
         post = super(PostDetail, self).get_object()
+        tags = post.tags.split(',')
         comments = post.comment_set.all()
-        context = {'post': post, 'comments': comments}
+        context = {'post': post, 'comments': comments, 'tags': tags}
         return render(request, self.template_name, context)
     
 class NewPost(CreateView):

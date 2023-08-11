@@ -1,0 +1,9 @@
+.comment-main {
+    margin: 8px;
+    border-bottom: 1px solid lightgray;
+    padding: 8px;
+}
+
+.comment-main .footer {
+    font-size: 12px;
+}

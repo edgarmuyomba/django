@@ -21,3 +21,16 @@
 .profileCard > .details {
     padding: 10px;
 }
+
+.profileCard > .details > button {
+    margin: 4px;
+    border-radius: 20px;
+    padding: 8px;
+    border: none;
+    background-color: lightgray;
+}
+
+.profileCard > .details > button:hover {
+    background-color: darkgray;
+    color: white;
+}

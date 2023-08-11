@@ -1,32 +1,36 @@
 {% extends "blog/base.html" %}
+{% load static %}
+
+{% block staticfiles %}
+<link rel="stylesheet" href="{% static 'blog/css/postDetail.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/blogComment.css' %}">
+{% endblock staticfiles%}
 
 {% block title %}
-    {{ post.title }}
+{{ post.title }}
 {% endblock title %}
 
 {% block content %}
-    <div class="header">Image</div>
-    <div class="main">
-        <div class="header">
-            <div class="topic"><a href="{% url 'blog:topicDetail' post.topic.uuid %}">{{ post.topic }}</a></div>
-            <div class="time">{{ post.dateAdded|date:"F jS o" }}</div>
-            <div class="auth"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a></div>
-        </div>
-        <div class="title">{{ post.title }}</div>
-        <div class="content">{{ post.text|linebreaks }}</div>
+<div class="postDetail">
+    <div class="header">
+        <div class="auth-time"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a> • {{ post.dateAdded|date:"F jS o" }}</div>
+        <div class="auth"></div>
+        <div class="title">{{ post.title|title }}</div>
+        <div class="topic"><a href="{% url 'blog:topicDetail' post.topic.uuid %}">{{ post.topic|upper }}</a></div>
         <div class="tags">
-            {{ post.tags }}
-        </div>
-        <div class="footer">
-            <div class="like">❤️</div>
-            <div class="share">🦈</div>
-        </div>
-        <div class="comment"><a href="{% url 'blog:newComment' post.uuid %}">Comment</a></div>
-        <div class="comments">
-            {% for comment in comments %}
-                {% include "blog/blogComment.html" %}
+            {% for tag in tags %}
+                <div class="tag">{{ tag }}</div>
             {% empty %}
             {% endfor %}
         </div>
     </div>
+    <div class="content">{{ post.text|linebreaks }}</div>
+    <div class="comment"><a href="{% url 'blog:newComment' post.uuid %}">Comments</a></div>
+    <div class="comments">
+        {% for comment in comments %}
+        {% include "blog/blogComment.html" %}
+        {% empty %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock content %}

@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,11 @@
     {% endblock staticfiles %}
     <title>
         {% block title %}
-            Jotter
+        Jotter
         {% endblock title %}
     </title>
 </head>
+
 <body>
     <div class="navbar">
         <a href="{% url 'blog:index' %}">
@@ -23,19 +25,28 @@
             </div>
         </a>
         <form action="{% url 'blog:search' %}" method="GET">
-            <input type="text" placeholder="Search" name='search'>
+            <div class="search">
+                <span>
+                    <img src="{% static 'blog/icons/magnify.svg' %}" alt="" height="25px">
+                </span>
+                <input type="text" placeholder="Search posts, authors, topics" autocomplete="off" name='search'>
+            </div>
         </form>
-        <div class="links">
+        <div class="authlinks">
             {% if user.is_authenticated %}
-                <a href="{% url 'accounts:profile' user.username %}" class="profile">
-                    <img src="{% static 'blog/icons/account-circle.svg' %}" alt="" style="width: 25px;">
-                    
-                </a>
-                <a href="{% url 'accounts:logout' %}" class="logout">
-                    <img src="{% static 'blog/icons/logout.svg' %}" alt="" style="width: 25px;">
-                    </a>
+            <a href="{% url 'accounts:profile' user.username %}" class="profile">
+                <button>Profile</button>
+            </a>
+            <a href="{% url 'accounts:logout' %}" class="logout">
+                <button>Logout</button>
+            </a>
             {% else %}
-                <a href="{% url 'accounts:login' %}" class="login">Login</a>
+            <a href="{% url 'accounts:login' %}" class="login">
+            <button>Login</button>
+            </a>
+            <a href="{% url 'accounts:signup' %}" class="logout">
+            <button>Signup</button>
+            </a>
             {% endif %}
         </div>
     </div>
@@ -44,4 +55,5 @@
         {% endblock content %}
     </div>
 </body>
+
 </html>

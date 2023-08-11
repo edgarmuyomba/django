@@ -1,9 +1,8 @@
-<div class="comment">
-    <div class="main">
+<div class="comment-main">
+    <div class="comment-div">
         <div class="text">{{ comment.text }}</div>
         <div class="footer">
-            <div class="author">{{ comment.author }}</div>
-            <div class="dateAdded">{{ comment.dateAdded|date:"F jS o" }}</div>
+            <div class="author-date"><a href="{% url 'accounts:profile' comment.author %}">{{ comment.author }}</a> • {{ comment.dateAdded|date:"F jS"|lower }}</div>
         </div>
     </div>
 </div>
