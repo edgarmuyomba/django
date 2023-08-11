@@ -1,13 +1,52 @@
 {% extends "blog/base.html" %}
+{% load static %}
+
+{% block staticfiles %}
+<link rel="stylesheet" href="{% static 'blog/css/newPost.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/newPostField.css' %}">
+{% endblock staticfiles %}
 
 {% block title %}
-    Jot
+Jot
 {% endblock title %}
 
 {% block content %}
-    <form action="{% url 'blog:newPost' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit">
+<div class="newPost">
+    <div class="postmain">
+        <div class="title">This is a title</div>
+        <div class="newPost-form">
+            <form action="{% url 'blog:newPost' %}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                {% if field.name != 'topic' and field.name != 'tags' %}
+                {% include 'blog/newPostField.html' %}
+                {% else %}
+                {% endif %}
+                {% endfor %}
+                <input type="submit">
+        </div>
+    </div>
+    <div class="aside">
+        <div class="post-author">
+            <div class="title">Author</div>
+            <div class="name">
+                <div class="profileImage"></div>
+                {{ user.get_full_name }}
+            </div>
+        </div>
+        <div class="topic-tags">
+            {% for field in form %}
+            {% if field.name == 'topic' or field.name == 'tags' %}
+            <div class="aside-field">
+                <div class="title">{{ field.name|title }}</div>
+                <div class="errors">{{ field.error }}</div>
+                <div class="field">{{ field }}</div>
+            </div>
+            {% else %}
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
     </form>
+</div>
 {% endblock content %}

@@ -3,6 +3,11 @@
     width: 50px;
     background-color: darkgray;
     border: 0;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.newPost:hover {
+    background-color: lightgray;
 }
 
 .main > .header {

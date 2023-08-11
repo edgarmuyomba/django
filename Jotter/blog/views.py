@@ -60,6 +60,7 @@ class NewPost(CreateView):
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
+        self.object = None
         if form.is_valid():
             newPost = form.save(commit=False)
             newPost.author = request.user
