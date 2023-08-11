@@ -23,12 +23,26 @@
     padding: 32px;
     border-radius: 5px;
     width: 100%;
-    background-color: lightgray;
+    background-color: rgb(235, 235, 235);
 }
 
 .newPost > .aside {
     padding: 0;
-    margin-top: 32px;
+    margin-top: 4px;
+}
+
+.newPost > .aside > .submit {
+    padding: 8px 20px;
+    margin-bottom: 8px;
+    border: 1px solid lightgray;
+    transition: background-color 0.2s ease-in-out;
+    background-color: teal;
+    color: white;
+}
+
+.newPost > .aside > .submit:hover {
+    background-color: lightseagreen;
+    color: white;
 }
 
 .newPost > .aside .title {
@@ -74,4 +88,53 @@
 
 .aside-field #id_topic {
     height: 45px;
+}
+
+.aside > .topic-tags > .post-date > .header {
+    font-weight: 700;
+    font-size: 13.5px;
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    padding: 0;
+}
+
+.topic-tags > .post-date {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 2fr 1.5fr;
+    gap: 8px;
+    align-items: center;
+}
+
+.topic-tags > .post-date > .date, 
+.topic-tags > .post-date > .time {
+    border: 1px solid lightgray;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topic-tags > .post-date > .date > .content,
+.topic-tags > .post-date > .time > .content {
+    margin-left: 8px
+}
+
+.topic-tags > .post-date > .date > .icon {
+    content: url('../icons/calendar-month.svg');
+    width: 30px;
+    display: block;
+    float: right;
+    margin-right: 8px;
+}
+
+.topic-tags > .post-date > .time > .icon {
+    content: url('../icons/clock-outline.svg');
+    width: 30px;
+    display: block;
+    float: right;
+    margin-right: 8px;
 }

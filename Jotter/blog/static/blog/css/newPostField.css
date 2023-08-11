@@ -20,3 +20,13 @@
     margin-bottom: 4px;
     font-size: 13px;
 }
+
+.post-field .errorlist {
+    list-style-type: none;
+    font-size: 12px;
+    padding: 8px;
+    border-left: 2px solid red;
+    margin-bottom: 4px;
+    color: red;
+    background-color: rgb(255, 211, 194);
+}

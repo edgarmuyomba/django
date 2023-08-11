@@ -66,6 +66,8 @@ class NewPost(CreateView):
             newPost.author = request.user
             newPost.save()
             return HttpResponseRedirect(self.success_url)
+        else:
+            print(form.errors.as_data())
         return self.form_invalid(form)
     
 class NewComment(CreateView):

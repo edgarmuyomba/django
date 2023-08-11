@@ -4,6 +4,7 @@
 {% block staticfiles %}
 <link rel="stylesheet" href="{% static 'blog/css/newPost.css' %}">
 <link rel="stylesheet" href="{% static 'blog/css/newPostField.css' %}">
+<script src="{% static 'blog/js/newPost.js' %}" defer></script>
 {% endblock staticfiles %}
 
 {% block title %}
@@ -13,9 +14,9 @@ Jot
 {% block content %}
 <div class="newPost">
     <div class="postmain">
-        <div class="title">This is a title</div>
+        <div class="title"></div>
         <div class="newPost-form">
-            <form action="{% url 'blog:newPost' %}" method="POST">
+            <form action="{% url 'blog:newPost' %}" method="POST" id="newPostForm">
                 {% csrf_token %}
                 {% for field in form %}
                 {% if field.name != 'topic' and field.name != 'tags' %}
@@ -23,10 +24,11 @@ Jot
                 {% else %}
                 {% endif %}
                 {% endfor %}
-                <input type="submit">
+            </form>
         </div>
     </div>
     <div class="aside">
+        <input type="submit" form="newPostForm" class="submit">
         <div class="post-author">
             <div class="title">Author</div>
             <div class="name">
@@ -45,8 +47,18 @@ Jot
             {% else %}
             {% endif %}
             {% endfor %}
+            <div class="post-date">
+                <div class="header">Post Date</div>
+                <div class="date">
+                    <div class="content"></div>
+                    <div class="icon"></div>
+                </div>
+                <div class="time">
+                    <div class="content"></div>
+                    <div class="icon"></div>
+                </div>
+            </div>
         </div>
     </div>
-    </form>
 </div>
 {% endblock content %}
