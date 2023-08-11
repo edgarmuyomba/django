@@ -9,7 +9,7 @@ class PostForm(forms.ModelForm):
     topic = forms.ModelChoiceField(empty_label='Select a topic', queryset=Topic.objects.all(), widget=forms.Select(attrs={'form': 'newPostForm'}))
     class Meta:
         model = Post 
-        fields = []
+        fields = ['title', 'text', 'topic', 'tags']
     field_order = ['title', 'text', 'topic', 'tags']
 
     def clean(self):

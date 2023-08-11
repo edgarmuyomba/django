@@ -57,11 +57,37 @@
 
 .postDetail > .content {
     margin: 16px 0;
+    border: 1px solid lightgray;
+    border-top: none;
+    padding: 16px;
+}
+
+.postDetail > .content img {
+    width: 20px;
+}
+
+.postDetail > .content > .feedback,
+.postDetail > .content > .feedback > * {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+.postDetail > .content > .feedback {
+    gap: 8px;
+    margin-top: 8px;
+    padding-left: auto;
+    width: 150px;
+    margin-left: auto;
 }
 
 .postDetail > .comment {
     font-weight: 700;
     font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .postDetail > .comments {
@@ -69,4 +95,27 @@
     padding: 16px;
     background-color: rgb(246, 246, 246);
     margin-top: 8px;
+}
+
+.postDetail > .newComment {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.postDetail > .newComment > input {
+    width: 100%;
+    height: 40px;
+    padding: 16px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+.postDetail > .newComment > input:focus {
+    border: 3px solid gray;
+    outline: none;
+}
+
+.postDetail > .newComment > button {
+    padding: 0 16px;
 }

@@ -67,8 +67,7 @@ class NewPost(CreateView):
             newPost.save()
             return HttpResponseRedirect(self.success_url)
         else:
-            print(form.errors.as_data())
-        return self.form_invalid(form)
+            return self.form_invalid(form)
     
 class NewComment(CreateView):
     form_class = CommentForm
@@ -113,6 +112,5 @@ def search(request):
         posts = Post.objects.filter(text__icontains=query) | Post.objects.filter(title__icontains=query)
         authors = CustomUser.objects.filter(first_name__icontains=query) | CustomUser.objects.filter(last_name__icontains=query) | CustomUser.objects.filter(username__icontains=query)
         comments = Comment.objects.filter(text__icontains=query)
-        # results = list(chain(topics, posts, comments, authors))
         results = {'topics': topics, 'posts': posts, 'authors': authors, 'comments': comments}
         return render(request, 'blog/search.html', {'results': results, 'query': query })

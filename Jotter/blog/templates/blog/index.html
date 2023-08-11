@@ -18,7 +18,7 @@
             <img src="{% static 'blog/img/blank.jpg' %}" alt="">
             <div class="time">{{ top.dateAdded|date:"F jS o" }}</div>
             <div class="title"><a href="{% url 'blog:postDetail' top.slug %}">{{ top.title|upper }}</a></div>
-            <div class="content">{{ top.text|truncatewords:100 }}</div>
+            <div class="content">{{ top.text|truncatewords:50 }}</div>
         </div>
         <div class="side">
             {% for post in three %}

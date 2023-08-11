@@ -138,3 +138,13 @@
     float: right;
     margin-right: 8px;
 }
+
+.aside-field .errorlist {
+    list-style-type: none;
+    font-size: 12px;
+    padding: 8px;
+    border-left: 2px solid red;
+    margin-bottom: 4px;
+    color: red;
+    background-color: rgb(255, 211, 194);
+}

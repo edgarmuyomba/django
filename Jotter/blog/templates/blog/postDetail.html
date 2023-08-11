@@ -13,20 +13,32 @@
 {% block content %}
 <div class="postDetail">
     <div class="header">
-        <div class="auth-time"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a> • {{ post.dateAdded|date:"F jS o" }}</div>
+        <div class="auth-time"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a> • {{
+            post.dateAdded|date:"F jS o" }}</div>
         <div class="auth"></div>
         <div class="title">{{ post.title|title }}</div>
         <div class="topic"><a href="{% url 'blog:topicDetail' post.topic.uuid %}">{{ post.topic|upper }}</a></div>
         <div class="tags">
             {% for tag in tags %}
-                <div class="tag">{{ tag }}</div>
+            <div class="tag">{{ tag }}</div>
             {% empty %}
             {% endfor %}
         </div>
     </div>
-    <div class="content">{{ post.text|linebreaks }}</div>
-    <div class="comment"><a href="{% url 'blog:newComment' post.uuid %}">Comments</a></div>
+    <div class="content">
+        {{ post.text|linebreaks }}
+        <div class="feedback">
+            <div class="like"><img src="{% static 'blog/icons/thumb-up.svg' %}" alt=""> Like</div>
+            <div class="reply"><img src="{% static 'blog/icons/reply.svg' %}" alt=""> <a
+                    href="{% url 'blog:newComment' post.uuid %}">Reply</a></div>
+        </div>
+    </div>
+    <div class="newComment">
+        <input type="text" placeholder="Your response...">
+        <button class="submit">Submit</button>
+    </div>
     {% if comments %}
+    <div class="comment">Comments</div>
     <div class="comments">
         {% for comment in comments %}
         {% include "blog/blogComment.html" %}
