@@ -1,0 +1,11 @@
+.search-main {
+    margin: 0 200px;
+}
+
+.search-title {
+    border: 1px solid lightgray;
+    padding: 16px;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 8px;
+}

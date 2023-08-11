@@ -11,11 +11,13 @@
     align-items: center;
 }
 
-.profileCard > .profileImage {
+.profileCard > .dp {
     background-image: url('../img/profile.jpg');
-    width: 75px;
-    height: 75px;
+    width: 100px;
+    height: 100px;
     background-position: center;
+    background-size: cover;
+    border-radius: 50%;
 }
 
 .profileCard > .details {

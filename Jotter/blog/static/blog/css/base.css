@@ -23,7 +23,7 @@ a:hover {
     flex-direction: row;
     background-color: white;
     padding: 16px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid lightgray;
     gap: 32px;
     align-items: center;
     width: 100%;

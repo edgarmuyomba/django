@@ -1,13 +1,48 @@
 {% extends 'blog/base.html' %}
+{% load static %}
+
+{% block staticfiles %}
+<link rel="stylesheet" href="{% static 'accounts/css/topicTab.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/blogPost.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/blogComment.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/css/profileTab.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/search.css' %}">
+{% endblock staticfiles %}
 
 {% block title %}
-    {{ query }}
+{{ query }}
 {% endblock title %}
 
 {% block content %}
-    {% for results in results %}
-        <p>{{ results }}</p>
-    {% empty %}
-        <p>No results contain {{ query }}</p>
+<div class="search-main">
+    <!-- <div class="query">"{{ query }}"</div> -->
+    {% if results.topics %}
+    <div class="search-topic search-title">Topics</div>
+    {% for topic in results.topics %}
+    {% include 'registration/topicTab.html' %}
     {% endfor %}
+    {% else %}
+    {% endif %}
+    {% if results.posts %}
+    <div class="search-post search-title">Posts</div>
+    {% for post in results.posts %}
+    {% include 'blog/blogPost.html' %}
+    {% endfor %}
+    {% else %}
+    {% endif %}
+    {% if results.comments %}
+    <div class="search-comment search-title">Comments</div>
+    {% for comment in results.comments %}
+    {% include 'blog/blogComment.html' %}
+    {% endfor %}
+    {% else %}
+    {% endif %}
+    {% if results.authors %}
+    <div class="search-author search-title">Authors</div>
+    {% for author in results.authors %}
+    {% include 'registration/profileTab.html' with profile=author %}
+    {% endfor %}
+    {% else %}
+    {% endif %}
+</div>
 {% endblock content %}

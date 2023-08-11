@@ -26,11 +26,14 @@
     </div>
     <div class="content">{{ post.text|linebreaks }}</div>
     <div class="comment"><a href="{% url 'blog:newComment' post.uuid %}">Comments</a></div>
+    {% if comments %}
     <div class="comments">
         {% for comment in comments %}
         {% include "blog/blogComment.html" %}
         {% empty %}
         {% endfor %}
     </div>
+    {% else %}
+    {% endif %}
 </div>
 {% endblock content %}
