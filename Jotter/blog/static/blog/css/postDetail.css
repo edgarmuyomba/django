@@ -82,6 +82,10 @@
     margin-left: auto;
 }
 
+.postDetail > .content > .feedback > .reply:hover {
+    color: lightgray;
+}
+
 .postDetail > .comment {
     font-weight: 700;
     font-size: 20px;
@@ -103,7 +107,11 @@
     gap: 8px;
 }
 
-.postDetail > .newComment > input {
+.postDetail > .newComment > form {
+    width: 100%;
+}
+
+.postDetail > .newComment input {
     width: 100%;
     height: 40px;
     padding: 16px;
@@ -111,11 +119,20 @@
     border: 1px solid lightgray;
 }
 
-.postDetail > .newComment > input:focus {
+.postDetail > .newComment input:focus {
     border: 3px solid gray;
     outline: none;
 }
 
-.postDetail > .newComment > button {
+.postDetail > .newComment .submit {
     padding: 0 16px;
+    width: 150px;
+}
+
+.postDetail > .commentState.success {
+    padding: 8px;
+    border-left: 3px solid lime;
+    background-color: rgb(201, 255, 201);
+    color: darkgreen;
+    margin-bottom: 8px;
 }

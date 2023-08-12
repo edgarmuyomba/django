@@ -4,6 +4,7 @@
 {% block staticfiles %}
 <link rel="stylesheet" href="{% static 'blog/css/postDetail.css' %}">
 <link rel="stylesheet" href="{% static 'blog/css/blogComment.css' %}">
+<script src="{% static 'blog/js/postDetail.js' %}" defer></script>
 {% endblock staticfiles%}
 
 {% block title %}
@@ -13,8 +14,7 @@
 {% block content %}
 <div class="postDetail">
     <div class="header">
-        <div class="auth-time"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a> • {{
-            post.dateAdded|date:"F jS o" }}</div>
+        <div class="auth-time"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a> • {{ post.dateAdded|date:"F jS o" }}</div>
         <div class="auth"></div>
         <div class="title">{{ post.title|title }}</div>
         <div class="topic"><a href="{% url 'blog:topicDetail' post.topic.uuid %}">{{ post.topic|upper }}</a></div>
@@ -29,13 +29,18 @@
         {{ post.text|linebreaks }}
         <div class="feedback">
             <div class="like"><img src="{% static 'blog/icons/thumb-up.svg' %}" alt=""> Like</div>
-            <div class="reply"><img src="{% static 'blog/icons/reply.svg' %}" alt=""> <a
-                    href="{% url 'blog:newComment' post.uuid %}">Reply</a></div>
+            <div class="reply"><img src="{% static 'blog/icons/reply.svg' %}" alt=""> Reply</div>
         </div>
     </div>
-    <div class="newComment">
-        <input type="text" placeholder="Your response...">
-        <button class="submit">Submit</button>
+    <div class="commentState success" style="display: none">
+    </div>
+    <div class="newComment" style="display: none">
+        <div class="commentURL" hidden>{% url 'blog:newComment' post.uuid %}</div>
+        <form id="commentForm">
+            {% csrf_token %}
+            <input type="text" name="text" placeholder="Your response..." autocomplete="off">
+        </form>
+        <input type="submit" class="submit">
     </div>
     {% if comments %}
     <div class="comment">Comments</div>

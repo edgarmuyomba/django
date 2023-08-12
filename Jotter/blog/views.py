@@ -114,3 +114,14 @@ def search(request):
         comments = Comment.objects.filter(text__icontains=query)
         results = {'topics': topics, 'posts': posts, 'authors': authors, 'comments': comments}
         return render(request, 'blog/search.html', {'results': results, 'query': query })
+    
+def newComment(request, uuid):
+    if request.method == 'POST':
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            post = get_object_or_404(Post, uuid=uuid)
+            text = form.cleaned_data['text']
+            newComment = Comment(post=post, text=text)
+            newComment.author = request.user
+            newComment.save()
+            return JsonResponse({'success': 'your response was posted'})
