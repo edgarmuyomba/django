@@ -1,0 +1,11 @@
+.authFormField {
+    margin: 10px;
+}
+
+.authFormField input[id^='id'] {
+    width: 400px;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding-left: 8px;
+}
