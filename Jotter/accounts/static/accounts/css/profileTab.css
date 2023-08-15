@@ -9,12 +9,13 @@
     flex-direction: row;
     gap: 8px;
     align-items: center;
+    margin-top: 4px;
 }
 
 .profileCard > .dp {
     background-image: url('../img/profile.jpg');
     width: 100px;
-    height: 100px;
+    height: 100px; 
     background-position: center;
     background-size: cover;
     border-radius: 50%;

@@ -29,7 +29,9 @@
         {{ post.text|linebreaks }}
         <div class="feedback">
             <div class="like"><img src="{% static 'blog/icons/thumb-up.svg' %}" alt=""> Like</div>
+            {% if user.is_authenticated %}
             <div class="reply"><img src="{% static 'blog/icons/reply.svg' %}" alt=""> Reply</div>
+            {% endif %}
         </div>
     </div>
     <div class="commentState success" style="display: none">

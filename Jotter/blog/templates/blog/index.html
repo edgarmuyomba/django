@@ -2,16 +2,18 @@
 {% load static %}
 
 {% block staticfiles %}
-    <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/css/blogPost.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/blogPost.css' %}">
 {% endblock staticfiles %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <a href="{% url 'blog:newPost' %}">
     <button class="newPost">
         <img src="{% static 'blog/icons/pen.svg' %}" width="15px" alt="">
     </button>
 </a>
+{% endif %}
 <div class="main">
     <div class="header">
         <div class="top">
@@ -22,15 +24,15 @@
         </div>
         <div class="side">
             {% for post in three %}
-                <div class="three">
-                    <div class="image">
-                        <img src="{% static 'blog/img/blank.jpg' %}" alt="">
-                    </div>
-                    <div class="title">
-                        <div class="time">{{ post.dateAdded|date:"F jS o" }}</div>
-                        <div class="title"><a href="{% url 'blog:postDetail' post.slug %}">{{ post.title|upper }}</a></div>
-                    </div>
+            <div class="three">
+                <div class="image">
+                    <img src="{% static 'blog/img/blank.jpg' %}" alt="">
                 </div>
+                <div class="title">
+                    <div class="time">{{ post.dateAdded|date:"F jS o" }}</div>
+                    <div class="title"><a href="{% url 'blog:postDetail' post.slug %}">{{ post.title|upper }}</a></div>
+                </div>
+            </div>
             {% empty %}
             {% endfor %}
         </div>

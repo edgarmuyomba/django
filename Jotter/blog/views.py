@@ -1,12 +1,14 @@
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Post, Topic, Comment, Like
+from .models import Post, Topic, Comment
 from accounts.models import CustomUser
 from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from itertools import chain
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class Index(ListView):
@@ -24,6 +26,7 @@ class Index(ListView):
             posts = posts[1:]
         return render(request, self.template_name, {'posts': posts, 'top': top, 'three': three})
 
+@method_decorator(login_required, name="dispatch")
 class TopicDetail(DetailView):
     model = Topic 
     slug_field = 'uuid'
@@ -52,6 +55,7 @@ class PostDetail(DetailView):
         context = {'post': post, 'comments': comments, 'tags': tags}
         return render(request, self.template_name, context)
     
+@method_decorator(login_required, name="dispatch")
 class NewPost(CreateView):
     form_class = PostForm
     model = Post
@@ -68,7 +72,8 @@ class NewPost(CreateView):
             return HttpResponseRedirect(self.success_url)
         else:
             return self.form_invalid(form)
-    
+
+@method_decorator(login_required, name="dispatch") 
 class NewComment(CreateView):
     form_class = CommentForm
     model = Comment 
@@ -86,20 +91,13 @@ class NewComment(CreateView):
         post = get_object_or_404(Post, uuid=post_uuid)
         return reverse("blog:postDetail", args=[post.slug])
 
-def likePost(request, uuid):
-    post = get_object_or_404(Post, uuid=uuid)
-    if Like.objects.filter(user=request.user).exists():
-        post.likes.remove(request.user)
-    else:
-        newLike = Like(owner=request.user, post=post)
-        newLike.save()
-    post.save()
-
+@login_required
 def subscribe(request, uuid):
     topic = get_object_or_404(Topic, uuid=uuid)
     request.user.topics.add(topic)
     return JsonResponse({'message': 'success'})
 
+@login_required
 def unsubscribe(request, uuid):
     topic = get_object_or_404(Topic, uuid=uuid)
     request.user.topics.remove(topic)
@@ -114,7 +112,8 @@ def search(request):
         comments = Comment.objects.filter(text__icontains=query)
         results = {'topics': topics, 'posts': posts, 'authors': authors, 'comments': comments}
         return render(request, 'blog/search.html', {'results': results, 'query': query })
-    
+
+@login_required   
 def newComment(request, uuid):
     if request.method == 'POST':
         form = CommentForm(data=request.POST)

@@ -11,7 +11,7 @@ buttons.forEach((button) => {
                     button.classList.add('follow');
                     button.textContent = 'Follow';
                 })
-                .catch(error, () => {
+                .catch(error => {
                     console.error(error);
                 });
         } else if (state === 'follow') {
@@ -21,7 +21,7 @@ buttons.forEach((button) => {
                     button.classList.add('unfollow');
                     button.textContent = 'Unfollow';
                 })
-                .catch(error, () => {
+                .catch(error => {
                     console.error(error);
                 });
         } else {

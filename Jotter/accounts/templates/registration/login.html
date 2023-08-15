@@ -1,5 +1,35 @@
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit">
-</form>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/authFormField.css' %}">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="bgImage"></div>
+    <div class="login">
+        <div class="logo"><img src="{% static 'blog/icons/post.svg' %}" alt="" style="width: 100px;"></div>
+        <div class="title">Jotter</div>
+        <div class="subtitle">Hello again!</div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% if field.non_field_error %}
+                <div class="errors">{{ form.non_field_errors }}</div>
+            {% endif %}
+            {% for field in form %}
+            {% include 'registration/authFormField.html' %}
+            {% empty %}
+            {% endfor %}
+            <input type="submit" class="submit">
+        </form>
+        <div class="signup">Don't have an account yet? <a href="{% url 'accounts:signup' %}">Signup</a></div>
+    </div>
+</body>
+
+</html>

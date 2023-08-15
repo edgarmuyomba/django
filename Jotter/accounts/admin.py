@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser
+from .models import *
 
 class topicInline(admin.TabularInline):
     model = CustomUser.topics.through 
@@ -9,3 +9,8 @@ class userAdmin(admin.ModelAdmin):
     inlines = [topicInline]
 
 admin.site.register(CustomUser, userAdmin)
+
+class RelationAdmin(admin.ModelAdmin):
+    list_display = ['from_user', 'to_user']
+
+admin.site.register(FollowerRelation, RelationAdmin)
