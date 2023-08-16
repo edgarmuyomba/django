@@ -19,6 +19,7 @@ class Post(models.Model):
     dateAdded = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(null=False)
     tags = models.CharField(max_length=50)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, through='LikeRelation', related_name='likedPosts')
 
     def __str__(self):
         return self.title
@@ -31,6 +32,25 @@ class Post(models.Model):
             slugList = self.title.split(' ')
             self.slug = slugify(slugList[:5])
         return super().save(*args, **kwargs)
+    
+    def like(self, user):
+        relation = LikeRelation.objects.get_or_create(author=user, post=self)
+        return relation
+    
+    def unlike(self, user):
+        relation = LikeRelation.objects.get(author=user, post=self)
+        if relation:
+            relation.delete()
+    
+class LikeRelation(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('author', 'post')
+
+    def __str__(self):
+        return f"'{self.author}' likes '{self.post}'"
 
 class Comment(models.Model):
     uuid = models.UUIDField(default=uuid4)

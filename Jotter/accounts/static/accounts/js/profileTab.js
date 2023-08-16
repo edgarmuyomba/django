@@ -13,14 +13,6 @@ async function fetchDetails(username) {
     return details;
 }
 
-const associates = document.querySelectorAll('.followers li');
-associates.forEach( async (associate) => {
-    let username = associate.textContent;
-
-    let details = await fetchDetails(username);
-    loadDetails(details);
-});
-
 function loadDetails(details) {
     let profiles = document.querySelectorAll('.profileCard > .details');
     profiles.forEach((profile) => {
@@ -33,3 +25,12 @@ function loadDetails(details) {
 
     })
 }
+
+const associates = document.querySelectorAll('.followers li');
+associates.forEach( async (associate) => {
+    let username = associate.textContent;
+
+    let details = await fetchDetails(username);
+    loadDetails(details);
+});
+

@@ -50,12 +50,12 @@
                         <span class="badge">{{ posts|length }}</span>
                     </button>
                 </li>
-                <!-- <li>
+                <li>
                     <button class="likedPosts">
                         Likes
                         <span class="badge">{{ likedPosts|length }}</span>
                     </button>
-                </li> -->
+                </li>
                 <li>
                     <button class="topics">
                         Topics
@@ -81,18 +81,27 @@
                 {% for post in posts %}
                 {% include 'blog/blogPost.html' %}
                 {% empty %}
+                <div class="empty-image">
+                    <div class="empty"></div>
+                </div>
                 {% endfor %}
             </div>
             <div class="following" style="display: none;">
                 {% for follower in associates.following %}
                 {% include 'registration/profileTab.html' with profile=follower %}
                 {% empty %}
+                <div class="empty-image">
+                    <div class="empty"></div>
+                </div>
                 {% endfor %}
             </div>
             <div class="followers" style="display: none;">
                 {% for follower in associates.followers %}
                 {% include 'registration/profileTab.html' with profile=follower %}
                 {% empty %}
+                <div class="empty-image">
+                    <div class="empty"></div>
+                </div>
                 {% endfor %}
             </div>
             <div class="likedPosts" style="display: none;">
@@ -105,6 +114,9 @@
                 {% for topic in topics %}
                 {% include 'registration/topicTab.html' %}
                 {% empty %}
+                <div class="empty-image">
+                    <div class="empty"></div>
+                </div>
                 {% endfor %}
             </div>
         </div>

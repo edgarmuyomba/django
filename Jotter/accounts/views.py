@@ -39,10 +39,11 @@ class Profile(DetailView):
         topics = profile.topics.all()
         followers = profile.followers.all()
         following = profile.following.all()
+        likedPosts = profile.likedPosts.all()
         follow = False
         if request.user in profile.followers.all():
             follow = True
-        context = {'profile': profile, 'posts': posts, 'comments': comments, 'topics': topics, 'follow': follow, 'associates': {'followers': followers, 'following': following}}
+        context = {'profile': profile, 'posts': posts, 'comments': comments, 'topics': topics, 'likedPosts': likedPosts,'follow': follow, 'associates': {'followers': followers, 'following': following}}
         return render(request, self.template_name, context)
     
 @login_required
