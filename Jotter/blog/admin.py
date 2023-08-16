@@ -18,3 +18,8 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(Comment, CommentAdmin)
 
 admin.site.register(LikeRelation)
+
+class DraftAdmin(admin.ModelAdmin):
+    list_display = ['author', 'title', 'dateAdded']
+
+admin.site.register(Draft, DraftAdmin)

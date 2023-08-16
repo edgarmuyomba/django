@@ -41,6 +41,21 @@ class Post(models.Model):
         relation = LikeRelation.objects.get(author=user, post=self)
         if relation:
             relation.delete()
+
+class Draft(models.Model):
+    uuid = models.UUIDField(default=uuid4, auto_created=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150, null=True, blank=True)
+    text = models.TextField(null=True, blank=True)
+    dateAdded = models.DateTimeField(auto_now_add=True)
+    tags = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ('-dateAdded',)
+
     
 class LikeRelation(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

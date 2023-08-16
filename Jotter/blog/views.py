@@ -148,3 +148,4 @@ class Tag(ListView):
         tag = self.kwargs['tag']
         posts = super(Tag, self).get_queryset().filter(tags__icontains=tag)
         return render(request, self.template_name, {'tag': tag, 'posts': posts})
+

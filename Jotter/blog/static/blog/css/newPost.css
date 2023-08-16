@@ -32,7 +32,14 @@
     margin-top: 4px;
 }
 
-.newPost > .aside > .submit {
+.newPost > .aside > .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.newPost > .aside .submit {
     padding: 8px 20px;
     margin: 8px 0;
     border: 1px solid lightgray;
@@ -41,9 +48,14 @@
     color: white;
 }
 
-.newPost > .aside > .submit:hover {
+.newPost > .aside .submit:hover {
     background-color: lightseagreen;
     color: white;
+}
+
+.newPost > .aside .draft {
+    height: 33px;
+    width: 100px;
 }
 
 .newPost > .aside .title {
