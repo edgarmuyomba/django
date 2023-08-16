@@ -26,7 +26,9 @@
         <div class="topic"><a href="{% url 'blog:topicDetail' post.topic.uuid %}">{{ post.topic|upper }}</a></div>
         <div class="tags">
             {% for tag in tags %}
-            <div class="tag">{{ tag }}</div>
+            <a href="{% url 'blog:tag' tag %}">
+                <div class="tag">{{ tag }}</div>
+            </a>
             {% empty %}
             {% endfor %}
         </div>

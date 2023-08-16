@@ -14,5 +14,6 @@ urlpatterns = [
     path('unlike/<str:uuid>/', unlike, name="unlike"),
     path('subscribe/<str:uuid>/', subscribe, name="subscribe"),
     path('unsubscribe/<str:uuid>/', unsubscribe, name="unsubscribe"),
-    path('search/', search, name='search')
+    path('search/', search, name='search'),
+    path('tag/<str:tag>/', Tag.as_view(), name="tag")
 ]

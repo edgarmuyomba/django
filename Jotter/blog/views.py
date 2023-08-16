@@ -55,7 +55,6 @@ class PostDetail(DetailView):
         like = False 
         if post in request.user.likedPosts.all():
             like = True
-        print(like)
         context = {'post': post, 'comments': comments, 'tags': tags, 'like': like}
         return render(request, self.template_name, context)
     
@@ -140,3 +139,12 @@ def unlike(request, uuid):
     post = Post.objects.get(uuid=uuid)
     post.unlike(request.user)
     return JsonResponse({'success': 'post liked'})
+
+class Tag(ListView):
+    model = Post 
+    template_name = "blog/tag.html"
+
+    def get(self, request, *args, **kwargs):
+        tag = self.kwargs['tag']
+        posts = super(Tag, self).get_queryset().filter(tags__icontains=tag)
+        return render(request, self.template_name, {'tag': tag, 'posts': posts})
