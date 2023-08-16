@@ -12,9 +12,15 @@
 {% endblock title %}
 
 {% block content %}
+<script>
+    const likeUrl = "{% url 'blog:like' post.uuid %}";
+    const unlikeUrl = "{% url 'blog:unlike' post.uuid %}";
+</script>
+
 <div class="postDetail">
     <div class="header">
-        <div class="auth-time"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a> • {{ post.dateAdded|date:"F jS o" }}</div>
+        <div class="auth-time"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a> • {{
+            post.dateAdded|date:"F jS o" }}</div>
         <div class="auth"></div>
         <div class="title">{{ post.title|title }}</div>
         <div class="topic"><a href="{% url 'blog:topicDetail' post.topic.uuid %}">{{ post.topic|upper }}</a></div>
@@ -28,7 +34,17 @@
     <div class="content">
         {{ post.text|linebreaks }}
         <div class="feedback">
-            <div class="like"><img src="{% static 'blog/icons/thumb-up.svg' %}" alt=""> Like</div>
+            <div>
+                {% if like %}
+                <img src="{% static 'blog/icons/thumb-up.svg' %}" alt="">
+                <a href="#" class="dislike">dislike</a>
+                <a href="#" class="like" style="display: none;">like</a>
+                {% else %}
+                <img src="{% static 'blog/icons/thumb-up.svg' %}" alt="" style="display: none;">
+                <a href="#" class="like">like</a>
+                <a href="#" class="dislike" style="display: none;">dislike</a>
+                {% endif %}
+            </div>
             {% if user.is_authenticated %}
             <div class="reply"><img src="{% static 'blog/icons/reply.svg' %}" alt=""> Reply</div>
             {% endif %}

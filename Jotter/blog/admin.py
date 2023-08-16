@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Topic, Post, Comment 
+from .models import *
 
 class TopicAdmin(admin.ModelAdmin):
     pass 
@@ -16,3 +16,5 @@ class CommentAdmin(admin.ModelAdmin):
     pass 
 
 admin.site.register(Comment, CommentAdmin)
+
+admin.site.register(LikeRelation)

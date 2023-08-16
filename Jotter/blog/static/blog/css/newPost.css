@@ -16,7 +16,7 @@
     border-bottom: 1px solid lightgray;
     padding: 10px 16px;
     width: 100%;
-    margin-bottom: 16px;
+    margin: 40px 0 16px 0;
     min-height: 50px;
 }
 
@@ -34,7 +34,7 @@
 
 .newPost > .aside > .submit {
     padding: 8px 20px;
-    margin-bottom: 8px;
+    margin: 8px 0;
     border: 1px solid lightgray;
     transition: background-color 0.2s ease-in-out;
     background-color: teal;

@@ -52,7 +52,11 @@ class PostDetail(DetailView):
         post = super(PostDetail, self).get_object()
         tags = post.tags.split(',')
         comments = post.comment_set.all()
-        context = {'post': post, 'comments': comments, 'tags': tags}
+        like = False 
+        if post in request.user.likedPosts.all():
+            like = True
+        print(like)
+        context = {'post': post, 'comments': comments, 'tags': tags, 'like': like}
         return render(request, self.template_name, context)
     
 @method_decorator(login_required, name="dispatch")
@@ -124,3 +128,15 @@ def newComment(request, uuid):
             newComment.author = request.user
             newComment.save()
             return JsonResponse({'success': 'your response was posted'})
+        
+@login_required
+def like(request, uuid):
+    post = Post.objects.get(uuid=uuid)
+    post.like(request.user)
+    return JsonResponse({'success': 'post liked'})
+
+@login_required
+def unlike(request, uuid):
+    post = Post.objects.get(uuid=uuid)
+    post.unlike(request.user)
+    return JsonResponse({'success': 'post liked'})
