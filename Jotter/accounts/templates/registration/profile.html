@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{% static 'accounts/css/profileTab.css' %}">
 {% endblock staticfiles %}
 
-{% block title %} 
+{% block title %}
 {{ profile.username }}
 {% endblock title %}
 
@@ -20,17 +20,17 @@
         var unfollowUrl = "{% url 'accounts:unfollow' profile.username %}";
         var followUrl = "{% url 'accounts:follow' profile.username %}";
     </script>
-    
+
     <div class="sidebar">
         <div class="profileImage"></div>
         <h3 class="name">{{ profile.get_full_name }}</h3>
         <p class="handle">@{{ profile.username }}</p>
         {% if request.user != profile %}
-            {% if follow %}
-                <button class="unfollow">Unfollow</button>
-            {% else %}
-                <button class="follow">Follow</button>
-            {% endif %}
+        {% if follow %}
+        <button class="unfollow">Unfollow</button>
+        {% else %}
+        <button class="follow">Follow</button>
+        {% endif %}
         {% else %}
         {% endif %}
         <div class="stats">
@@ -45,7 +45,7 @@
         <div class="profileNavbar">
             <ul>
                 <li>
-                    <button class="posts selected"> 
+                    <button class="posts selected">
                         Posts
                         <span class="badge">{{ posts|length }}</span>
                     </button>
@@ -65,13 +65,13 @@
                 <li>
                     <button class="following">
                         Following
-                        <span class="badge">{{ following|length }}</span>
+                        <span class="badge">{{ associates.following|length }}</span>
                     </button>
                 </li>
                 <li>
                     <button class="followers">
                         Followers
-                        <span class="badge">{{ followers|length }}</span>
+                        <span class="badge">{{ associates.followers|length }}</span>
                     </button>
                 </li>
             </ul>
@@ -84,13 +84,13 @@
                 {% endfor %}
             </div>
             <div class="following" style="display: none;">
-                {% for follower in following %}
+                {% for follower in associates.following %}
                 {% include 'registration/profileTab.html' with profile=follower %}
                 {% empty %}
                 {% endfor %}
             </div>
             <div class="followers" style="display: none;">
-                {% for follower in followers %}
+                {% for follower in associates.followers %}
                 {% include 'registration/profileTab.html' with profile=follower %}
                 {% empty %}
                 {% endfor %}
@@ -110,4 +110,12 @@
         </div>
     </div>
 </div>
+<ul class="followers" style="display: none;">
+    {% for follower in associates.followers %}
+    <li>{{ follower }}</li>
+    {% endfor %}
+    {% for follower in associates.following %}
+    <li>{{ follower }}</li>
+    {% endfor %}
+</ul>
 {% endblock content %}

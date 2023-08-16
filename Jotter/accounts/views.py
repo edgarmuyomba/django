@@ -42,7 +42,7 @@ class Profile(DetailView):
         follow = False
         if request.user in profile.followers.all():
             follow = True
-        context = {'profile': profile, 'posts': posts, 'comments': comments, 'topics': topics, 'follow': follow, 'followers': followers, 'following': following}
+        context = {'profile': profile, 'posts': posts, 'comments': comments, 'topics': topics, 'follow': follow, 'associates': {'followers': followers, 'following': following}}
         return render(request, self.template_name, context)
     
 @login_required
@@ -68,4 +68,4 @@ class ProfileDetails(DetailView):
         profile = super(ProfileDetails, self).get_object()
         posts = profile.post_set.all().count()
         followers = profile.followers.all().count()
-        return JsonResponse({'posts': posts, 'followers': followers})
+        return JsonResponse({'username': profile.username, 'posts': posts, 'followers': followers})
