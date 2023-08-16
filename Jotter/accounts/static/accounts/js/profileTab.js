@@ -1,39 +1,30 @@
-function fetchDetails(username) {
+async function fetchDetails(username) {
 
     const detailUrl = `/accounts/profileDetails/${username}/`;
 
     let details = { 'none': null };
-
-    fetch(detailUrl)
-        .then(response => response.json())
-        .then(success => {
-            details = {
-                'username': success.username,
-                'posts': success.posts,
-                'followers': success.followers
-            }
-        })
-        .catch(error => {
-            details = {
-                'error': error
-            }
-        });
+    try {
+            let res = await fetch(detailUrl)
+            let data = await res.json();
+            return data;
+    } catch (e) {
+        console.log(e);
+    }
     return details;
 }
 
 const associates = document.querySelectorAll('.followers li');
-associates.forEach((associate) => {
+associates.forEach( async (associate) => {
     let username = associate.textContent;
 
-    let details = fetchDetails(username);
-    console.log(details.none);
+    let details = await fetchDetails(username);
     loadDetails(details);
 });
 
 function loadDetails(details) {
     let profiles = document.querySelectorAll('.profileCard > .details');
     profiles.forEach((profile) => {
-        let username = profile.querySelector('.name').textContent;
+        let username = profile.querySelector('.handle').textContent;
 
         if (username === details.username) {
             let extras = profile.querySelector('.extra-details');
