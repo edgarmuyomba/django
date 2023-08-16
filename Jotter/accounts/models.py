@@ -19,7 +19,7 @@ class CustomUser(AbstractUser):
     def unfollow(self, other):
         relation = FollowerRelation.objects.get(from_user=self, to_user=other)
         if relation:
-            relation.delete()
+            relation.delete() 
     
 class FollowerRelation(models.Model):
     from_user = models.ForeignKey(CustomUser, related_name="from_user_relations", on_delete=models.CASCADE)

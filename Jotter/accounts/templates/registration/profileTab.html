@@ -1,9 +1,15 @@
+<script>
+    var unfollowUrl = "{% url 'accounts:unfollow' profile.username %}";
+    var followUrl = "{% url 'accounts:follow' profile.username %}";
+    var detailUrl = "{% url 'accounts:profileDetails' profile.username %}";
+</script>
+
 <div class="profileCard">
     <div class="dp"></div>
     <civ class="details">
         <div class="name">{{ profile.get_full_name }}</div>
         <div class="handle"><a href="{% url 'accounts:profile' profile.username %}">{{ profile.username }}</a></div>
-        <div class="followers">{{ profile.followers }}</div>
+        <div class="extra-details"></div>
         {% if user.is_authenticated %}
         <button class="state">Unfollow</button>
         {% endif %}

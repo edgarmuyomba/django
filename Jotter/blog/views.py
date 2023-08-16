@@ -36,11 +36,11 @@ class TopicDetail(DetailView):
     def get(self, request, *args, **kwargs):
         topic = super(TopicDetail, self).get_object()
         posts = topic.post_set.all()
-        followers = topic.followers.all()
+        subscribers = topic.subscribers.all()
         subscribed = False 
         if topic in request.user.topics.all():
             subscribed = True 
-        context = {'posts': posts, 'topic': topic, 'subscribed': subscribed, 'followers': followers}
+        context = {'posts': posts, 'topic': topic, 'subscribed': subscribed, 'subscribers': subscribers}
         return render(request, self.template_name, context)
     
 class PostDetail(DetailView):

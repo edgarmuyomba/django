@@ -38,7 +38,7 @@
 }
 
 .topic-header>.followers:after {
-    content: ' follower(s)';
+    content: ' subscriber(s)';
     z-index: 1;
 }
 
