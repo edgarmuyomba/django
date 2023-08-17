@@ -1,8 +1,41 @@
 .newPost {
-    margin: 0  0 0 200px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+.newPost > .drafts {
+    width: clamp(250px, 300px, 300px);
+}
+
+.newPost .draft-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: slategray;
+    margin: 8px 0;
+}
+
+.newPost > .drafts .draft-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.newPost > .drafts  .draft {
+    border: 1px solid lightgray;
+    padding: 16px;
+    border-radius: 10px;
+    max-height: 95px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+   -webkit-line-clamp: 4;
+           line-clamp: 4; 
+   -webkit-box-orient: vertical;
+}
+
+.newPost > .drafts  .draft:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .newPost > .postmain {
@@ -46,6 +79,7 @@
     transition: background-color 0.2s ease-in-out;
     background-color: teal;
     color: white;
+    width: 50%;
 }
 
 .newPost > .aside .submit:hover {
@@ -55,7 +89,11 @@
 
 .newPost > .aside .draft {
     height: 33px;
-    width: 100px;
+    width: 100%
+}
+
+.newPost > .aside .buttons > a {
+    width: 50%;
 }
 
 .newPost > .aside .title {

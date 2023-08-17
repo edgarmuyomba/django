@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'blog/css/newPost.css' %}">
 <link rel="stylesheet" href="{% static 'blog/css/newPostField.css' %}">
 <script src="{% static 'blog/js/newPost.js' %}" defer></script>
+<!-- <script src="{% static 'blog/js/drafts.js' %}" defer></script> -->
 {% endblock staticfiles %}
 
 {% block title %}
@@ -12,7 +13,30 @@ Jot
 {% endblock title %}
 
 {% block content %}
+<script>
+    var draftUrl = "{% url 'blog:newDraft' %}";
+</script>
+
 <div class="newPost">
+    <!-- <div class="drafts">
+        <div class="draft-title">Drafts</div>
+        <div class="draft-cards">
+            <a href="">
+                <div class="draft">
+                    <div class="title">Lorem ipsum dolor sit amet</div>
+                    <div class="body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos doloribus neque veritatis molestiae perferendis tempora fuga repellendus nihil numquam iusto quo soluta corporis voluptatibus distinctio ullam in, vel velit perspiciatis?</div>
+                    <div class="tags">vel, velit, perspiciatis</div>
+                </div>
+            </a>
+            <a href="">
+                <div class="draft">
+                    <div class="title">Lorem ipsum dolor sit amet</div>
+                    <div class="body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos doloribus neque veritatis molestiae perferendis tempora fuga repellendus nihil numquam iusto quo soluta corporis voluptatibus distinctio ullam in, vel velit perspiciatis?</div>
+                    <div class="tags">vel, velit, perspiciatis</div>
+                </div>
+            </a>
+        </div>
+    </div> -->
     <div class="postmain">
         <div class="title"></div>
         <div class="newPost-form">
@@ -60,7 +84,7 @@ Jot
         </div>
         <div class="buttons">
             <input type="submit" form="newPostForm" class="submit">
-            <button class="draft">Draft</button>
+            <!-- <a href="{% url 'blog:newDraft' %}"><button class="draft">Draft</button></a> -->
         </div>
     </div>
 </div>

@@ -13,13 +13,14 @@ class Topic(models.Model):
 class Post(models.Model):
     uuid = models.UUIDField(default=uuid4, auto_created=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
-    text = models.TextField()
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=150, null=True, blank=True)
+    text = models.TextField(null=True, blank=True)
     dateAdded = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(null=False)
-    tags = models.CharField(max_length=50)
+    tags = models.CharField(max_length=50, null=True, blank=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, through='LikeRelation', related_name='likedPosts')
+    draft = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

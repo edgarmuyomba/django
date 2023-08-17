@@ -15,5 +15,6 @@ urlpatterns = [
     path('subscribe/<str:uuid>/', subscribe, name="subscribe"),
     path('unsubscribe/<str:uuid>/', unsubscribe, name="unsubscribe"),
     path('search/', search, name='search'),
-    path('tag/<str:tag>/', Tag.as_view(), name="tag")
+    path('tag/<str:tag>/', Tag.as_view(), name="tag"),
+    path('draft/', newDraft, name="newDraft"),
 ]

@@ -140,6 +140,7 @@ def unlike(request, uuid):
     post.unlike(request.user)
     return JsonResponse({'success': 'post liked'})
 
+@method_decorator(login_required, name='dispatch')
 class Tag(ListView):
     model = Post 
     template_name = "blog/tag.html"
@@ -148,4 +149,9 @@ class Tag(ListView):
         tag = self.kwargs['tag']
         posts = super(Tag, self).get_queryset().filter(tags__icontains=tag)
         return render(request, self.template_name, {'tag': tag, 'posts': posts})
+    
 
+@login_required()
+def newDraft(request):
+    if request.method == 'POST':
+        return JsonResponse({"success": "new draft added"})
