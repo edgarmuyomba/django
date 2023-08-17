@@ -19,8 +19,7 @@
 
 <div class="postDetail">
     <div class="header">
-        <div class="auth-time"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a> • {{
-            post.dateAdded|date:"F jS o" }}</div>
+        <div class="auth-time"><a href="{% url 'accounts:profile' post.author %}">@{{ post.author }}</a> • {{ post.dateAdded|date:"F jS o" }}</div>
         <div class="auth"></div>
         <div class="title">{{ post.title|title }}</div>
         <div class="topic"><a href="{% url 'blog:topicDetail' post.topic.uuid %}">{{ post.topic|upper }}</a></div>
